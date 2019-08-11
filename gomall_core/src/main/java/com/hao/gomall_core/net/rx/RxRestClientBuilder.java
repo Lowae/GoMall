@@ -2,12 +2,7 @@ package com.hao.gomall_core.net.rx;
 
 import android.content.Context;
 
-import com.hao.gomall_core.net.RestClient;
 import com.hao.gomall_core.net.RestCreator;
-import com.hao.gomall_core.net.callback.IError;
-import com.hao.gomall_core.net.callback.IFailure;
-import com.hao.gomall_core.net.callback.IRequest;
-import com.hao.gomall_core.net.callback.ISuccess;
 import com.hao.gomall_core.ui.LoaderStyle;
 
 import java.io.File;
@@ -21,10 +16,6 @@ public class RxRestClientBuilder {
 
     private String mUrl;
     private static final Map<String, Object> PARAMS = RestCreator.getParams();
-    private IRequest mRequest;
-    private ISuccess mSuccess;
-    private IFailure mFailure;
-    private IError mError;
     private RequestBody mBody;
     private Context mContext;
     private LoaderStyle mLoaderStyle;
@@ -57,25 +48,6 @@ public class RxRestClientBuilder {
         return this;
     }
 
-    public final RxRestClientBuilder onRequest(IRequest iRequest){
-        this.mRequest = iRequest;
-        return this;
-    }
-
-    public final RxRestClientBuilder success(ISuccess iSuccess){
-        this.mSuccess = iSuccess;
-        return this;
-    }
-
-    public final RxRestClientBuilder failure(IFailure iFailure){
-        this.mFailure = iFailure;
-        return this;
-    }
-
-    public final RxRestClientBuilder error(IError iError){
-        this.mError = iError;
-        return this;
-    }
 
     public final RxRestClientBuilder loader(Context context, LoaderStyle style){
         this.mContext = context;
@@ -119,7 +91,7 @@ public class RxRestClientBuilder {
         return this;
     }
 
-    public final RestClient build(){
-        return new RestClient(mUrl, PARAMS, mRequest, mSuccess, mFailure, mError, mBody, mLoaderStyle, mFlie, mDownloadDir, mExtension, mName, mContext);
+    public final RxRestClient build(){
+        return new RxRestClient(mUrl, PARAMS, mBody, mLoaderStyle, mFlie, mDownloadDir, mExtension, mName, mContext);
     }
 }
