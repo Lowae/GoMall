@@ -3,18 +3,21 @@ package com.hao.gomall_core.net;
 import android.content.Context;
 
 import com.hao.gomall_core.app.Configurator;
-import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.net.callback.IError;
 import com.hao.gomall_core.net.callback.IFailure;
 import com.hao.gomall_core.net.callback.IRequest;
 import com.hao.gomall_core.net.callback.ISuccess;
 import com.hao.gomall_core.net.callback.RequestCallBacks;
+import com.hao.gomall_core.net.download.DownloadHandler;
 import com.hao.gomall_core.ui.LoaderStyle;
 import com.hao.gomall_core.ui.MallLoader;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +32,10 @@ public class RestClient {
     private final IError IERROR;
     private final RequestBody BODY;
     private final LoaderStyle LOADER_STYLE;
+    private final File FILE;
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
     private Context context;
 
 
@@ -40,6 +47,10 @@ public class RestClient {
                       IError ierror,
                       RequestBody body,
                       LoaderStyle loaderStyle,
+                      File file,
+                      String downloadDir,
+                      String extension,
+                      String name,
                       Context context) {
         URL = url;
         PARAMS.putAll(params);
@@ -49,6 +60,10 @@ public class RestClient {
         IERROR = ierror;
         BODY = body;
         LOADER_STYLE = loaderStyle;
+        FILE = file;
+        DOWNLOAD_DIR = downloadDir;
+        EXTENSION = extension;
+        NAME = name;
         this.context = context;
     }
 
@@ -73,12 +88,22 @@ public class RestClient {
             case POST:
                 call = service.post(URL, PARAMS);
                 break;
+            case POST_RAW:
+                call = service.postRaw(URL, BODY);
+                break;
             case PUT:
                 call = service.put(URL, PARAMS);
+                break;
+            case PUT_RAW:
+                call = service.postRaw(URL, BODY);
                 break;
             case DELETE:
                 call = service.delete(URL, PARAMS);
                 break;
+            case UPLOAD:
+                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
+                final MultipartBody.Part body = MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
+                call = service.upload(URL, body);
             default:
                 break;
         }
@@ -97,15 +122,33 @@ public class RestClient {
     }
 
     public final void post(){
-        request(HttpMethod.POST);
+        if (BODY == null){
+            request(HttpMethod.POST);
+        }else {
+            if (!PARAMS.isEmpty()){
+                throw new RuntimeException("params must be null");
+            }
+            request(HttpMethod.POST_RAW);
+        }
     }
 
     public final void put(){
-        request(HttpMethod.PUT);
+        if (BODY == null){
+            request(HttpMethod.PUT);
+        }else {
+            if (!PARAMS.isEmpty()){
+                throw new RuntimeException("params must be null");
+            }
+            request(HttpMethod.PUT);
+        }
     }
 
     public final void delete(){
         request(HttpMethod.DELETE);
+    }
+
+    public final void download(){
+        new DownloadHandler(URL, IREQUEST, DOWNLOAD_DIR, EXTENSION, NAME, ISUCCESS, IFAILURE, IERROR);
     }
 
 }

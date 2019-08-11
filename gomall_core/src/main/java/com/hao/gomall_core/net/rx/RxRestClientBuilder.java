@@ -1,7 +1,9 @@
-package com.hao.gomall_core.net;
+package com.hao.gomall_core.net.rx;
 
 import android.content.Context;
 
+import com.hao.gomall_core.net.RestClient;
+import com.hao.gomall_core.net.RestCreator;
 import com.hao.gomall_core.net.callback.IError;
 import com.hao.gomall_core.net.callback.IFailure;
 import com.hao.gomall_core.net.callback.IRequest;
@@ -15,8 +17,8 @@ import java.util.WeakHashMap;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class RestClientBuilder {
-    
+public class RxRestClientBuilder {
+
     private String mUrl;
     private static final Map<String, Object> PARAMS = RestCreator.getParams();
     private IRequest mRequest;
@@ -31,88 +33,88 @@ public class RestClientBuilder {
     private String mExtension;
     private String mName;
 
-    RestClientBuilder(){
+    RxRestClientBuilder(){
 
     }
 
-    public final RestClientBuilder url(String url){
+    public final RxRestClientBuilder url(String url){
         this.mUrl = url;
         return this;
     }
 
-    public final RestClientBuilder params(WeakHashMap<String, Object> params){
+    public final RxRestClientBuilder params(WeakHashMap<String, Object> params){
         PARAMS.putAll(params);
         return this;
     }
 
-    public final RestClientBuilder params(String key, Object value){
+    public final RxRestClientBuilder params(String key, Object value){
         PARAMS.put(key, value);
         return this;
     }
 
-    public final RestClientBuilder raw(String raw){
+    public final RxRestClientBuilder raw(String raw){
         this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
         return this;
     }
 
-    public final RestClientBuilder onRequest(IRequest iRequest){
+    public final RxRestClientBuilder onRequest(IRequest iRequest){
         this.mRequest = iRequest;
         return this;
     }
 
-    public final RestClientBuilder success(ISuccess iSuccess){
+    public final RxRestClientBuilder success(ISuccess iSuccess){
         this.mSuccess = iSuccess;
         return this;
     }
 
-    public final RestClientBuilder failure(IFailure iFailure){
+    public final RxRestClientBuilder failure(IFailure iFailure){
         this.mFailure = iFailure;
         return this;
     }
 
-    public final RestClientBuilder error(IError iError){
+    public final RxRestClientBuilder error(IError iError){
         this.mError = iError;
         return this;
     }
 
-    public final RestClientBuilder loader(Context context, LoaderStyle style){
+    public final RxRestClientBuilder loader(Context context, LoaderStyle style){
         this.mContext = context;
         this.mLoaderStyle = style;
         return this;
     }
 
-    public final RestClientBuilder loader(Context context){
+    public final RxRestClientBuilder loader(Context context){
         this.mContext = context;
         this.mLoaderStyle = LoaderStyle.BallClipRotatePulseIndicator;
         return this;
     }
 
-    public final RestClientBuilder file(File file){
+    public final RxRestClientBuilder file(File file){
         this.mFlie = file;
         return this;
     }
 
-    public final RestClientBuilder file(String filePath){
+    public final RxRestClientBuilder file(String filePath){
         this.mFlie = new File(filePath);
         return this;
     }
 
-    public final RestClientBuilder file(String key, Object value){
+    public final RxRestClientBuilder file(String key, Object value){
         PARAMS.put(key, value);
         return this;
     }
 
-    public final RestClientBuilder name(String name) {
+    public final RxRestClientBuilder name(String name) {
         this.mName = name;
         return this;
     }
 
-    public final RestClientBuilder dir(String dir) {
+    public final RxRestClientBuilder dir(String dir) {
         this.mDownloadDir = dir;
         return this;
     }
 
-    public final RestClientBuilder extension(String extension) {
+    public final RxRestClientBuilder extension(String extension) {
         this.mExtension = extension;
         return this;
     }

@@ -1,9 +1,7 @@
 package com.hao.gomall_core.net.callback;
 
 import android.os.Handler;
-import android.os.SystemClock;
 
-import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.ui.LoaderStyle;
 import com.hao.gomall_core.ui.MallLoader;
 

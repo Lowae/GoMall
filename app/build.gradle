@@ -30,6 +30,8 @@ dependencies {
     implementation 'me.yokeyword:fragmentation:1.3.7'
     implementation 'me.yokeyword:fragmentation-swipeback:1.3.7'
 
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+
     implementation project(':gomall')
     annotationProcessor project(':gomall_compiler')
     implementation project(':gomall_core')
