@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 28
@@ -28,23 +29,27 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
-
-
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:design:28.0.0'
     //字体库
     implementation 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
-
     //fragmentation
     implementation 'me.yokeyword:fragmentation:1.3.7'
     implementation 'me.yokeyword:fragmentation-swipeback:1.3.7'
-
     //butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     //Banner
     implementation 'com.bigkoo:convenientbanner:2.0.5'
     implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
-
     implementation project(':gomall_core')
+    //数据库
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'org.greenrobot:greendao-generator:3.2.2'
+    //fastjson
+    implementation 'com.alibaba:fastjson:1.2.58'
+    //stetho
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
 
 }

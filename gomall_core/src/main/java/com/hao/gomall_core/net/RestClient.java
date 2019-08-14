@@ -72,7 +72,7 @@ public class RestClient {
     }
 
     private void request(HttpMethod method){
-        Configurator.getInstance().withApiHost(URL);
+//        Configurator.getInstance().withApiHost(URL);
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;
         if (IREQUEST != null){

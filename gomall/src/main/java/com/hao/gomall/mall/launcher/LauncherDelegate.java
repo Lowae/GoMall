@@ -1,5 +1,6 @@
 package com.hao.gomall.mall.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -7,7 +8,11 @@ import android.view.View;
 
 import com.hao.gomall.mall.R;
 import com.hao.gomall.mall.R2;
+import com.hao.gomall_core.app.AccountManager;
+import com.hao.gomall_core.app.IUserChecker;
 import com.hao.gomall_core.delegates.MallDelegate;
+import com.hao.gomall_core.ui.launcher.ILauncherListener;
+import com.hao.gomall_core.ui.launcher.OnLauncherFinishTag;
 import com.hao.gomall_core.ui.launcher.ScrollLauncherTag;
 import com.hao.gomall_core.utils.MallPreference;
 import com.hao.gomall_core.utils.timer.BaseTimerTask;
@@ -23,13 +28,14 @@ public class LauncherDelegate extends MallDelegate implements ITimerListener {
 
     private Timer mTimer;
     private int count = 5;
+    private ILauncherListener mILauncherListener;
 
     @BindView(R2.id.tv_launcher_timer)
     AppCompatTextView mTvTimer;
 
     @OnClick(R2.id.tv_launcher_timer)
     void onClickTimerView() {
-        if (mTimer != null){
+        if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
             checkIsShowScroll();
@@ -43,6 +49,14 @@ public class LauncherDelegate extends MallDelegate implements ITimerListener {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
+    }
+
+    @Override
     public Object setLayout() {
         return R.layout.delegate_launcher;
     }
@@ -53,11 +67,25 @@ public class LauncherDelegate extends MallDelegate implements ITimerListener {
     }
 
     //判断是否显示滑动Bannner
-    private void checkIsShowScroll(){
-        if (!MallPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())){
+    private void checkIsShowScroll() {
+        if (!MallPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
             start(new LauncherScrollDelegate(), SINGLETASK);
-        }else {
+        } else {
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
 
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 
@@ -69,8 +97,8 @@ public class LauncherDelegate extends MallDelegate implements ITimerListener {
                 if (mTvTimer != null) {
                     mTvTimer.setText(MessageFormat.format("跳过\n{0}s", count));
                     count--;
-                    if (count < 0){
-                        if (mTimer != null){
+                    if (count < 0) {
+                        if (mTimer != null) {
                             mTimer.cancel();
                             mTimer = null;
                             checkIsShowScroll();

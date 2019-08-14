@@ -37,6 +37,12 @@ dependencies {
     implementation 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
     implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
 
+    //Logger
+    implementation 'com.orhanobut:logger:2.2.0'
+    //stetho
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+
     implementation project(':gomall')
     annotationProcessor project(':gomall_compiler')
     implementation project(':gomall_core')
