@@ -1,6 +1,7 @@
 package com.hao.gomall_core.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 public class Mall {
 
@@ -17,6 +18,10 @@ public class Mall {
 
     public static <T> T getConfiguration(Object key){
         return getConfigurator().getConfiguration(key);
+    }
+
+    public static Handler getHandler(){
+        return getConfiguration(ConfigKeys.HANDLER);
     }
 
     public static Context getApplicationContext(){

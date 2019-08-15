@@ -13,5 +13,9 @@
     <string name="sign_in">登陆</string>
     <string name="is_Not_Sign_Up">没有账户？去注册</string>
     <string name="fa_weixin">{fa-weixin}</string>
+    <!--首页界面-->
+    <string name="icon_scan">{icon-scan}</string>
+    <string name="index_search">搜索</string>
+    <string name="fa_bullhorn">{fa-bullhorn}</string>
 
 </resources>

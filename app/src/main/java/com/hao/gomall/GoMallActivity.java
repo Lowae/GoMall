@@ -6,13 +6,15 @@ import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.hao.gomall.mall.launcher.LauncherDelegate;
+import com.hao.gomall.mall.main.MallBottomDelegate;
 import com.hao.gomall.mall.sign.ISignListenter;
 import com.hao.gomall.mall.sign.SignInDelegate;
-import com.hao.gomall.mall.sign.SignUpDalegate;
 import com.hao.gomall_core.activities.ProxyActivity;
+import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.delegates.MallDelegate;
 import com.hao.gomall_core.ui.launcher.ILauncherListener;
 import com.hao.gomall_core.ui.launcher.OnLauncherFinishTag;
+import com.jaeger.library.StatusBarUtil;
 
 public class GoMallActivity extends ProxyActivity implements ISignListenter, ILauncherListener {
 
@@ -23,6 +25,7 @@ public class GoMallActivity extends ProxyActivity implements ISignListenter, ILa
         if (actionBar != null) {
             actionBar.hide();
         }
+        Mall.getConfigurator().withContext(this);
     }
 
     @Override
@@ -45,11 +48,11 @@ public class GoMallActivity extends ProxyActivity implements ISignListenter, ILa
     public void onLauncherFinish(OnLauncherFinishTag tag) {
         switch (tag) {
             case SIGNED:
-                Toast.makeText(this, "启动结束，已登陆", Toast.LENGTH_LONG).show();
-                startWithPop(new GoMallDelegate());
+//                Toast.makeText(this, "启动结束，已登陆", Toast.LENGTH_LONG).show();
+                startWithPop(new MallBottomDelegate());
                 break;
             case NOT_SIGNED:
-                Toast.makeText(this, "启动结束，未登录", Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "启动结束，未登录", Toast.LENGTH_LONG).show();
                 startWithPop(new SignInDelegate());
                 break;
             default:

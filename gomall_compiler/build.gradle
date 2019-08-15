@@ -2,6 +2,10 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':gomall_annotations')
+    implementation 'com.squareup:javapoet:1.11.1'
+    implementation 'com.google.auto.service:auto-service:1.0-rc6'
+    implementation 'com.google.auto:auto-common:0.10'
 }
 
 sourceCompatibility = "7"

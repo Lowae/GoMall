@@ -1,5 +1,8 @@
 package com.hao.gomall_core.app;
 
+import android.app.Activity;
+import android.os.Handler;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -16,6 +19,7 @@ public class Configurator {
 
     private Configurator(){
         CONFIGS.put(ConfigKeys.CONFIG_READY, false);
+        CONFIGS.put(ConfigKeys.HANDLER, new Handler());
     }
 
     public static Configurator getInstance() {
@@ -70,6 +74,21 @@ public class Configurator {
 
     public final Configurator withIcon(IconFontDescriptor iconFontDescriptor){
         ICONS.add(iconFontDescriptor);
+        return this;
+    }
+
+    public final Configurator withWeChatAppId(String appId){
+        CONFIGS.put(ConfigKeys.WE_CHAT_APP_ID, appId);
+        return this;
+    }
+
+    public final Configurator withWeChatAppSecret(String appSecret){
+        CONFIGS.put(ConfigKeys.WE_CHAT_APP_SECRET, appSecret);
+        return this;
+    }
+
+    public final Configurator withContext(Activity activity){
+        CONFIGS.put(ConfigKeys.CONTEXT, activity);
         return this;
     }
 

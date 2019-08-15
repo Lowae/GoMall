@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_width="wrap_content"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:background="@drawable/new_img_loading_2"
+            android:id="@+id/iv_hot"
+            android:layout_gravity="center"
+            android:layout_height="180dp"
+            android:layout_width="180dp" />
+
+        <TextView
+            android:ellipsize="end"
+            android:id="@+id/tv_name"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="180dp"
+            android:lines="2"
+            android:padding="10dp"
+            android:text="【智趣屋】DIY小屋盒子剧场 手工拼装房子 模型玩具创意礼品 送工具"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tv_price"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_width="wrap_content"
+            android:text="￥88.00"
+            android:textColor="#ff4242"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

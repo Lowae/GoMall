@@ -1,4 +1,4 @@
-package com.hao.gomall.mall.util;
+package com.hao.gomall_core.utils;
 
 public class Constants {
 

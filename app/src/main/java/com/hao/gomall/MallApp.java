@@ -24,15 +24,7 @@ public class MallApp extends Application {
                 .configure();
         DBManager.getInstance().init(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
-//        initStetho();
-        Stetho.initializeWithDefaults(this);
     }
 
 
-    private void initStetho(){
-        Stetho.initialize(Stetho.newInitializerBuilder(this)
-        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-        .build());
-    }
 }
