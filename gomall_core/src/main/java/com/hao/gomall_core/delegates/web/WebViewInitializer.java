@@ -1,11 +1,13 @@
 package com.hao.gomall_core.delegates.web;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 public class WebViewInitializer {
 
+    @SuppressLint("SetJavaScriptEnabled")
     public WebView createWebView(WebView webView){
         WebView.setWebContentsDebuggingEnabled(true);
         //禁止水平横向滚动
@@ -23,6 +25,7 @@ public class WebViewInitializer {
         //初始化WebSetting
         final WebSettings settings = webView.getSettings();
         final String userAgent = settings.getUserAgentString();
+        settings.setJavaScriptEnabled(true);
         settings.setUserAgentString(userAgent + "GoMall");
         //隐藏缩放控件
         settings.setBuiltInZoomControls(false);

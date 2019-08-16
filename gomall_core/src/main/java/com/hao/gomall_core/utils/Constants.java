@@ -2,9 +2,15 @@ package com.hao.gomall_core.utils;
 
 public class Constants {
 
-    public static final String LOGIN_URL = "http://192.168.43.238:8080/gomall/user_profile.json";
+    //图书馆
+    public static final String LOGIN_URL = "http://172.30.110.57:8080/gomall/user_profile.json";
 
-    public final static String BASE_URL = "http://192.168.43.238:8080/atguigu";
+    public final static String BASE_URL = "http://172.30.110.57:8080/atguigu";
+
+//    手机热点
+//    public static final String LOGIN_URL = "http://172.30.110.57:8080/gomall/user_profile.json";
+//
+//    public final static String BASE_URL = "http://172.30.110.57:8080/atguigu";
 
 
     public final static String HOME_URL = BASE_URL + "/json/HOME_URL.json";

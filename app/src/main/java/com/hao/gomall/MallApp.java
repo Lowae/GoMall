@@ -2,7 +2,7 @@ package com.hao.gomall;
 
 import android.app.Application;
 
-import com.facebook.stetho.Stetho;
+import com.hao.gomall.event.TestEvent;
 import com.hao.gomall.mall.db.DBManager;
 import com.hao.gomall.mall.icon.FontEcModule;
 import com.hao.gomall_core.app.Mall;
@@ -21,6 +21,8 @@ public class MallApp extends Application {
                 .withIcon(new FontEcModule())
                 .withApiHost("http://169.254.7.30:8080/")
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
+                .withJavascriptInterface("GoMall")
+                .withWebEvent("test", new TestEvent())
                 .configure();
         DBManager.getInstance().init(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
