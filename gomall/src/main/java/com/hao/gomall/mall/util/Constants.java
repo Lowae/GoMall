@@ -2,9 +2,9 @@ package com.hao.gomall.mall.util;
 
 public class Constants {
 
-    public static final String LOGIN_URL = "http://192.168.0.101:8080/gomall/user_profile.json";
+    public static final String LOGIN_URL = "http://192.168.43.238:8080/gomall/user_profile.json";
 
-    public final static String BASE_URL = "http://192.168.0.101:8080/atguigu";
+    public final static String BASE_URL = "http://192.168.43.238:8080/atguigu";
 
 
     public final static String HOME_URL = BASE_URL + "/json/HOME_URL.json";

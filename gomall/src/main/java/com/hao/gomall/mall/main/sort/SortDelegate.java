@@ -8,6 +8,7 @@ import com.hao.gomall.mall.R;
 import com.hao.gomall_core.delegates.bottom.BottomItemDelegate;
 
 public class SortDelegate extends BottomItemDelegate {
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_sort;
@@ -15,6 +16,8 @@ public class SortDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-
+        assert getFragmentManager() != null;
+        getSupportDelegate().loadRootFragment(R.id.fl_type, new ListDelegate());
+//        getFragmentManager().beginTransaction().add(R.id.fl_type, new ListDelegate()).commit();
     }
 }
