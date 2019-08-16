@@ -23,6 +23,8 @@ public class MallApp extends Application {
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .withJavascriptInterface("GoMall")
                 .withWebEvent("test", new TestEvent())
+                .withWeChatAppSecret("7aef84dd87474207ffbc4ab44025d559")
+                .withWeChatAppId("wxf3c02e793c81f464")
                 .configure();
         DBManager.getInstance().init(this);
         Logger.addLogAdapter(new AndroidLogAdapter());

@@ -29,6 +29,11 @@ public class GoMallActivity extends ProxyActivity implements ISignListenter, ILa
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     public MallDelegate setRootDelegate() {
         return new LauncherDelegate();
     }
@@ -49,14 +54,19 @@ public class GoMallActivity extends ProxyActivity implements ISignListenter, ILa
         switch (tag) {
             case SIGNED:
 //                Toast.makeText(this, "启动结束，已登陆", Toast.LENGTH_LONG).show();
-                startWithPop(new MallBottomDelegate());
+                getSupportDelegate().startWithPop(new MallBottomDelegate());
                 break;
             case NOT_SIGNED:
 //                Toast.makeText(this, "启动结束，未登录", Toast.LENGTH_LONG).show();
-                startWithPop(new SignInDelegate());
+                getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void post(Runnable runnable) {
+
     }
 }

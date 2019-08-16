@@ -17,5 +17,34 @@
     <string name="icon_scan">{icon-scan}</string>
     <string name="index_search">搜索</string>
     <string name="fa_bullhorn">{fa-bullhorn}</string>
+    <!--购物车界面-->
+    <string name="clear_all">清空</string>
+    <string name="shop_cart">购物车</string>
+    <string name="delete">删除</string>
+    <string name="fa_check_circle">{fa-check-circle}</string>
+    <string name="check_all">全选</string>
+    <string name="sum">合计</string>
+    <string name="price">￥0.01</string>
+    <string name="settle_accounts">结算</string>
+    <!--购物车Item-->
+    <string name="goods_title">商品标题</string>
+    <string name="goods_describe">商品描述</string>
+    <string name="goods_price">2.00</string>
+    <string name="fa_minus_square_o">{fa-minus-square-o}</string>
+    <string name="goods_count">1</string>
+    <string name="fa_plus_square_o">{fa-plus-square-o}</string>
+    <!--个人中心-->
+    <string name="user_name">User</string>
+    <string name="order_form">我的订单</string>
+    <string name="all_order_form">全部订单</string>
+    <string name="fa_chevron_right">{fa-chevron-right}</string>
+    <string name="fa_credit_card">{fa-credit-card}</string>
+    <string name="wait_pay">待付款</string>
+    <string name="fa_truck">{fa-truck}</string>
+    <string name="wait_get">待收货</string>
+    <string name="fa_clone">{fa-clone}</string>
+    <string name="wait_comment">待评价</string>
+    <string name="fa_comments_o">{fa-comments-o}</string>
+    <string name="After_sale">售后</string>
 
 </resources>

@@ -51,5 +51,9 @@ dependencies {
     //stetho
     implementation 'com.facebook.stetho:stetho:1.5.1'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+    //圆角图片
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    //RecyclerView
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
 
 }

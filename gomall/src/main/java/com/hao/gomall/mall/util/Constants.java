@@ -2,18 +2,20 @@ package com.hao.gomall.mall.util;
 
 public class Constants {
 
-    //图书馆
-    public static final String LOGIN_URL = "http://172.30.110.57:8080/gomall/user_profile.json";
-
-    public final static String BASE_URL = "http://172.30.110.57:8080/atguigu";
-
-//    手机热点
+//    //图书馆
 //    public static final String LOGIN_URL = "http://172.30.110.57:8080/gomall/user_profile.json";
 //
 //    public final static String BASE_URL = "http://172.30.110.57:8080/atguigu";
 
+    //手机热点
+    public static final String LOGIN_URL = "http://192.168.43.238:8080/gomall/user_profile.json";
+
+    public final static String BASE_URL = "http://192.168.43.238:8080/atguigu";
+
 
     public final static String HOME_URL = BASE_URL + "/json/HOME_URL.json";
+
+    public static final String SHOP_CART_URL = BASE_URL + "/json/SHOP_CART.json";
 
     public final static String BASE_IMAGE_URL = BASE_URL + "/img";
 
