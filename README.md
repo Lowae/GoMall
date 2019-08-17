@@ -1,5 +1,7 @@
 # GoMall
 
+
+
 |主要开源库 | 介绍 |
 |--|--|
 |Fragmentation |单Activity + 多Fragment,简化开发，轻松解决动画、嵌套、事务相关等问题。 |
