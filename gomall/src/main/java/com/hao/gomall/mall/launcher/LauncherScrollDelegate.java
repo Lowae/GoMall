@@ -30,7 +30,6 @@ public class LauncherScrollDelegate extends MallDelegate implements OnItemClickL
         INTEGERS.add(R.mipmap.launcher_02);
         INTEGERS.add(R.mipmap.launcher_03);
         INTEGERS.add(R.mipmap.launcher_04);
-        INTEGERS.add(R.mipmap.launcher_05);
         mConvenientBanner
                 .setPages(new LauncherHolderCreator(), INTEGERS)
                 .setPageIndicator(new int[]{R.drawable.dot_normal, R.drawable.dot_focus})

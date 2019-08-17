@@ -79,7 +79,8 @@ public class SignInDelegate extends MallDelegate {
                         public void onSuccess(String response) {
                             MallLogger.json("USER_PROFILE", response);
                             SignHandler.onSignIn(response, mISignListenter);
-                            start(new MallBottomDelegate());
+                            MallLogger.d("SignInDelegate", response);
+                            startWithPop(new MallBottomDelegate());
                         }
                     })
                     .build()

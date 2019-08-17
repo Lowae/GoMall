@@ -86,7 +86,7 @@ public class SignUpDalegate extends MallDelegate {
 
     @OnClick(R2.id.tv_link_sign_in)
     public void onClickLinkSignIn(){
-        start(new SignInDelegate());
+        start(new SignInDelegate(), SINGLETASK);
     }
 
     private boolean checkForm() {

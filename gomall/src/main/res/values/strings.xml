@@ -47,4 +47,8 @@
     <string name="fa_comments_o">{fa-comments-o}</string>
     <string name="After_sale">售后</string>
 
+    <!--Page-->
+    <string name="pageBehavior" translatable="false" >com.hao.gomall.mall.ui.page.PageBehavior</string >
+
+
 </resources>

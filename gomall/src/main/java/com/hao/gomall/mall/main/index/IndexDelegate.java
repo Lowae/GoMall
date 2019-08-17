@@ -1,5 +1,6 @@
 package com.hao.gomall.mall.main.index;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,14 +10,21 @@ import android.view.View;
 
 import com.hao.gomall.mall.R;
 import com.hao.gomall.mall.R2;
+import com.hao.gomall.mall.goods.GoodsInfoActivity;
 import com.hao.gomall.mall.util.Constants;
 import com.hao.gomall_core.delegates.bottom.BottomItemDelegate;
+import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
+import com.hao.gomall_core.recycler.home.bean.GoodsBean;
 import com.hao.gomall_core.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 
-public class IndexDelegate extends BottomItemDelegate {
+import static com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter.GOODS_BEAN;
+
+public class IndexDelegate extends BottomItemDelegate implements IStartGoodsInfo {
     @BindView(R2.id.rv_index)
     RecyclerView rvIndex;
     @BindView(R2.id.refresh_index)
@@ -37,7 +45,7 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = new RefreshHandler(refreshIndex, rvIndex, getContext());
+        mRefreshHandler = new RefreshHandler(refreshIndex, rvIndex, getContext(), this);
     }
 
     @Override
@@ -57,4 +65,10 @@ public class IndexDelegate extends BottomItemDelegate {
         refreshIndex.setProgressViewOffset(true, 120, 300);
     }
 
+    @Override
+    public void startGoodsInfo(GoodsBean goodsBean) {
+        Intent intent = new Intent(getContext(), GoodsInfoActivity.class);
+        intent.putExtra(GOODS_BEAN,goodsBean);
+        Objects.requireNonNull(getContext()).startActivity(intent);
+    }
 }

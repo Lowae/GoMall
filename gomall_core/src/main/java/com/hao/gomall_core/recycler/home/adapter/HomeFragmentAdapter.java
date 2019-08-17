@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hao.gomall_core.R;
+import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.bean.GoodsBean;
 import com.hao.gomall_core.recycler.home.bean.ResultBeanData;
 import com.hao.gomall_core.recycler.home.decoration.HotRecyclerViewDecoration;
@@ -51,13 +52,16 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     private ResultBeanData.ResultBean resultBean;
     private LayoutInflater layoutInflater;
 
+    private IStartGoodsInfo iStartGoodsInfo;
+
     //当前类型
     private int currentType = BANNER;
 
-    public HomeFragmentAdapter(Context mContext, ResultBeanData.ResultBean resultBean) {
+    public HomeFragmentAdapter(Context mContext, ResultBeanData.ResultBean resultBean, IStartGoodsInfo iStartGoodsInfo) {
         this.mContext = mContext;
         this.resultBean = resultBean;
         layoutInflater = LayoutInflater.from(mContext);
+        this.iStartGoodsInfo = iStartGoodsInfo;
     }
 
     @NonNull
@@ -135,9 +139,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
 
 
     private void startGoodsInfoActivity(GoodsBean goodsBean) {
-        /*Intent intent = new Intent(mContext, GoodsInfoActivity.class);
-        intent.putExtra(GOODS_BEAN,goodsBean);
-        mContext.startActivity(intent);*/
+        iStartGoodsInfo.startGoodsInfo(goodsBean);
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder{

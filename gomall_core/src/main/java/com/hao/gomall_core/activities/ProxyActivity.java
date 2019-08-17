@@ -2,6 +2,7 @@ package com.hao.gomall_core.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.widget.FrameLayout;
 
 import com.hao.gomall_core.R;
@@ -21,9 +22,14 @@ public abstract class ProxyActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         DELEGATE.onCreate(savedInstanceState);
         initContaioner(savedInstanceState);
     }
+
 
     private void initContaioner(@Nullable Bundle savedInstanceState){
         final FrameLayout container = new FrameLayout(this);
