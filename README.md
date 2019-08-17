@@ -5,7 +5,7 @@
 |Fragmentation |单Activity + 多Fragment,简化开发，轻松解决动画、嵌套、事务相关等问题。 |
 |Butterknife  | Android系统的View注入框架,免去bindView的繁琐 |
 |okhttp  | 网络请求框架 |
-| Retrofit| 底层是使用OKHttp封装的网络加载框架。准确来说,网络请求的工作本质上是OkHttp完成，而 Retrofit 仅负责网络请求接口的封装。|
+| Retrofit| 底层是使用OKHttp封装的网络加载框架。负责网络请求接口的封装。|
 |Glide| 一款快速高效的Android图像加载库|
 |BaseRecyclerViewAdapterHelper|一个强大并且灵活的RecyclerViewAdapter|
 
