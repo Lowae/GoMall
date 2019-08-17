@@ -40,7 +40,7 @@ public class TypeLeftAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_type, null);
             holder = new ViewHolder();
-            holder.tv_name = (TextView) convertView.findViewById(R.id.tv_title);
+            holder.tv_name = convertView.findViewById(R.id.tv_title);
 
             convertView.setTag(holder);
         } else {

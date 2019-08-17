@@ -10,7 +10,25 @@
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center_horizontal">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:text="发现页面"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"/>
+
+            </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 

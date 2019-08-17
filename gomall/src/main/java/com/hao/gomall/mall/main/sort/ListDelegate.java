@@ -6,7 +6,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
@@ -55,7 +54,9 @@ public class ListDelegate extends MallDelegate {
                         TypeBean typeBean = JSON.parseObject(response, TypeBean.class);
                         if (isFirst) {
                             leftAdapter = new TypeLeftAdapter(getContext());
-                            lv_left.setAdapter(leftAdapter);
+                            if (lv_left != null){
+                                lv_left.setAdapter(leftAdapter);
+                            }
                         }
                         initListener(leftAdapter);
                         //解析右边数据

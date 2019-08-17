@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
 import com.hao.gomall.mall.R;
 import com.hao.gomall.mall.R2;
+import com.hao.gomall.mall.main.MallBottomDelegate;
 import com.hao.gomall.mall.util.Constants;
 import com.hao.gomall_core.delegates.MallDelegate;
 import com.hao.gomall_core.net.RestClient;
@@ -79,6 +79,7 @@ public class SignInDelegate extends MallDelegate {
                         public void onSuccess(String response) {
                             MallLogger.json("USER_PROFILE", response);
                             SignHandler.onSignIn(response, mISignListenter);
+                            start(new MallBottomDelegate());
                         }
                     })
                     .build()

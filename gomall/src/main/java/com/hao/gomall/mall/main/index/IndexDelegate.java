@@ -3,7 +3,6 @@ package com.hao.gomall.mall.main.index;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +11,6 @@ import com.hao.gomall.mall.R;
 import com.hao.gomall.mall.R2;
 import com.hao.gomall.mall.util.Constants;
 import com.hao.gomall_core.delegates.bottom.BottomItemDelegate;
-import com.hao.gomall_core.net.RestClient;
 import com.hao.gomall_core.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -25,8 +23,6 @@ public class IndexDelegate extends BottomItemDelegate {
     SwipeRefreshLayout refreshIndex;
     @BindView(R2.id.icon_index_scan)
     IconTextView iconIndexScan;
-    @BindView(R2.id.et_search_view)
-    AppCompatEditText etSearchView;
     @BindView(R2.id.icon_index_message)
     IconTextView iconIndexMessage;
     @BindView(R2.id.toolbar_index)

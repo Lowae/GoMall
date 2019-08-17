@@ -20,7 +20,7 @@ public class GoMallDelegate extends MallDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        testRestClient();
+//        testRestClient();
     }
 
     private void testRestClient(){

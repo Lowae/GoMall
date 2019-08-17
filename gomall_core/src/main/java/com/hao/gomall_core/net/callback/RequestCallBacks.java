@@ -5,6 +5,8 @@ import android.os.Handler;
 import com.hao.gomall_core.ui.LoaderStyle;
 import com.hao.gomall_core.ui.MallLoader;
 
+import org.jetbrains.annotations.NotNull;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +29,7 @@ public class RequestCallBacks implements Callback<String> {
     }
 
     @Override
-    public void onResponse(Call<String> call, Response<String> response) {
+    public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
         if (response.isSuccessful()){
             if (call.isExecuted()){
                 if (ISUCCESS != null){
@@ -44,7 +46,7 @@ public class RequestCallBacks implements Callback<String> {
     }
 
     @Override
-    public void onFailure(Call<String> call, Throwable t) {
+    public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
         if (IFAILURE != null){
             IFAILURE.onFailure();
         }

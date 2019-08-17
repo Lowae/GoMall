@@ -14,7 +14,6 @@ import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.delegates.MallDelegate;
 import com.hao.gomall_core.ui.launcher.ILauncherListener;
 import com.hao.gomall_core.ui.launcher.OnLauncherFinishTag;
-import com.jaeger.library.StatusBarUtil;
 
 public class GoMallActivity extends ProxyActivity implements ISignListenter, ILauncherListener {
 

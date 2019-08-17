@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:background="@android:color/holo_orange_dark"
+                android:background="@drawable/shape_corner"
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="@string/sign_in"

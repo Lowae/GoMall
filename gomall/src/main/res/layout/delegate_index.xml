@@ -30,16 +30,18 @@
                     android:textColor="@android:color/white"
                     android:textSize="24sp" />
 
-                <android.support.v7.widget.AppCompatEditText
+
+                <com.joanzapata.iconify.widget.IconTextView
                     android:id="@+id/et_search_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="4"
-                    android:background="@android:color/white"
+                    android:background="@drawable/shape_corner"
                     android:gravity="center_vertical"
-                    android:hint="@string/index_search"
-                    android:paddingStart="16dp" />
+                    android:text="@string/index_search"
+                    android:textSize="16sp"
+                    android:padding="8dp" />
 
                 <com.joanzapata.iconify.widget.IconTextView
                     android:id="@+id/icon_index_message"

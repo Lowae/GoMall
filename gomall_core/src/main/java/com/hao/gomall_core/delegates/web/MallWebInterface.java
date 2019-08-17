@@ -3,10 +3,8 @@ package com.hao.gomall_core.delegates.web;
 import android.webkit.JavascriptInterface;
 
 import com.alibaba.fastjson.JSON;
-import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.delegates.web.event.Event;
 import com.hao.gomall_core.delegates.web.event.EventManager;
-import com.hao.gomall_core.utils.MallLogger;
 
 public final class MallWebInterface {
 

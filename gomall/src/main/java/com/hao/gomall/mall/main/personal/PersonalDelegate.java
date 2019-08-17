@@ -11,6 +11,7 @@ import com.hao.gomall.mall.R2;
 import com.hao.gomall.mall.main.personal.list.ListAdapter;
 import com.hao.gomall.mall.main.personal.list.ListBean;
 import com.hao.gomall.mall.main.personal.order.OrderListDelegate;
+import com.hao.gomall.mall.main.personal.profile.UserProfileDelegate;
 import com.hao.gomall_core.delegates.bottom.BottomItemDelegate;
 
 import java.util.ArrayList;
@@ -31,6 +32,11 @@ public class PersonalDelegate extends BottomItemDelegate {
     public void onClickAllOrder(){
         mArgs.putString(ORDER_TYPE, "all");
         startOrderListByType();
+    }
+
+    @OnClick(R2.id.img_user_avatar)
+    public void onClickAvatar(){
+        getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
     }
 
     @Override

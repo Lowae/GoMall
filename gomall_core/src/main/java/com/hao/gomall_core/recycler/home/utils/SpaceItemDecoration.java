@@ -4,6 +4,8 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private int space;
@@ -13,7 +15,7 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NotNull Rect outRect, @NotNull View view, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         //不是第一个的格子都设一个左边和底部的间距
         outRect.left = space;
         outRect.bottom = space;

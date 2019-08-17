@@ -7,11 +7,11 @@ import com.hao.gomall_core.delegates.MallDelegate;
 
 public class ListBean implements MultiItemEntity {
 
-    private int mItemType = 0;
+    private int mItemType;
     private String mImageUrl;
     private String mText;
     private String mValue;
-    private int mId = 0;
+    private int mId;
     private MallDelegate mDelegate;
     private CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener;
 

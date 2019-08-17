@@ -245,16 +245,10 @@ public final class FileUtil {
      * 通知系统刷新系统相册，使照片展现出来
      */
     private static void refreshDCIM() {
-        if (Build.VERSION.SDK_INT >= 19) {
-            //兼容android4.4版本，只扫描存放照片的目录
-            MediaScannerConnection.scanFile(Mall.getApplicationContext(),
-                    new String[]{Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()},
-                    null, null);
-        } else {
-            //扫描整个SD卡来更新系统图库，当文件很多时用户体验不佳，且不适合4.4以上版本
-            Mall.getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" +
-                    Environment.getExternalStorageDirectory())));
-        }
+        //兼容android4.4版本，只扫描存放照片的目录
+        MediaScannerConnection.scanFile(Mall.getApplicationContext(),
+                new String[]{Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()},
+                null, null);
     }
 
     /**

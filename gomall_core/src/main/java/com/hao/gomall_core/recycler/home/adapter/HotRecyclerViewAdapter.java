@@ -39,7 +39,7 @@ public class HotRecyclerViewAdapter extends RecyclerView.Adapter<HotRecyclerView
         ResultBeanData.ResultBean.HotInfoBean hotInfoBean = datas.get(i);
         Glide.with(mContext).load(Constants.BASE_IMAGE_URL + hotInfoBean.getFigure()).optionalCenterCrop().into(viewHolder.iv_hot);
         viewHolder.tv_name.setText(hotInfoBean.getName());
-        viewHolder.tv_price.setText("￥"+hotInfoBean.getCover_price());
+        viewHolder.tv_price.setText(String.format("￥%s", hotInfoBean.getCover_price()));
     }
 
     @Override

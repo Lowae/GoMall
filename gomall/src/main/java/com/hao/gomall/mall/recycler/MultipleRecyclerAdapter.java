@@ -48,8 +48,8 @@ public class MultipleRecyclerAdapter extends
 
     @Override
     protected void convert(@NonNull MultipleViewHolder helper, MultipleItemEntity item) {
-        String text = null;
-        String imageUrl = null;
+        String text;
+        String imageUrl;
 
         switch (helper.getItemViewType()){
             case ItemType.TEXT:

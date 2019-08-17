@@ -47,7 +47,6 @@ public class OrderListDelegate extends MallDelegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         RestClient.builder()
-                .loader(getContext())
                 .url(Constants.ORDER_LIST_URL)
                 .success(new ISuccess() {
                     @Override

@@ -56,7 +56,7 @@ public class RecommendGridViewAdapter extends BaseAdapter {
         ResultBeanData.ResultBean.RecommendInfoBean recommendInfoBean = datas.get(position);
         Glide.with(context).load(Constants.BASE_IMAGE_URL + recommendInfoBean.getFigure()).into(viewHolder.iv_recommend);
         viewHolder.tv_name.setText(recommendInfoBean.getName());
-        viewHolder.tv_price.setText("￥"+recommendInfoBean.getCover_price());
+        viewHolder.tv_price.setText(String.format("￥%s", recommendInfoBean.getCover_price()));
 
         return convertView;
     }

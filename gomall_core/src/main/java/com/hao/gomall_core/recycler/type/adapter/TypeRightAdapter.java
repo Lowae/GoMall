@@ -20,6 +20,8 @@ import com.hao.gomall_core.recycler.type.bean.TypeBean;
 import com.hao.gomall_core.utils.Constants;
 import com.hao.gomall_core.utils.DensityUtil;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
@@ -63,7 +65,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
         if (viewType == HOT) {
             return new HotViewHolder(mLayoutInflater.inflate(R.layout.item_hot_right, null), mContext);
@@ -73,7 +75,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull RecyclerView.ViewHolder holder, int position) {
 
         if (getItemViewType(position) == HOT) {
             HotViewHolder hotViewHolder = (HotViewHolder) holder;
@@ -170,7 +172,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 //设置价格
                 LinearLayout.LayoutParams textViewLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 TextView textView = new TextView(mContext);
-                textView.setText("￥" + hot_product_list.get(i).getCover_price());
+                textView.setText(String.format("￥%s", hot_product_list.get(i).getCover_price()));
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextColor(Color.parseColor("#ed3f3f"));
 

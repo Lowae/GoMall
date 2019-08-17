@@ -4,7 +4,6 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.hao.gomall_core.delegates.web.event.Event;
-import com.hao.gomall_core.utils.MallLogger;
 
 public class TestEvent extends Event {
     @Override

@@ -2,7 +2,6 @@ package com.hao.gomall_core.net;
 
 import android.content.Context;
 
-import com.hao.gomall_core.app.Configurator;
 import com.hao.gomall_core.net.callback.IError;
 import com.hao.gomall_core.net.callback.IFailure;
 import com.hao.gomall_core.net.callback.IRequest;

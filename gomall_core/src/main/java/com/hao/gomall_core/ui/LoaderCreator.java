@@ -1,9 +1,7 @@
 package com.hao.gomall_core.ui;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.wang.avi.AVLoadingIndicatorView;
 import com.wang.avi.Indicator;

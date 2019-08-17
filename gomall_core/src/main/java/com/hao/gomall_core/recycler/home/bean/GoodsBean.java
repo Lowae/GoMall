@@ -1,5 +1,7 @@
 package com.hao.gomall_core.recycler.home.bean;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 
 public class GoodsBean implements Serializable {
@@ -76,6 +78,7 @@ public class GoodsBean implements Serializable {
         isSelected = selected;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "GoodsBean{" +

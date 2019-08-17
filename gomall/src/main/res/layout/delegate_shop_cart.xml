@@ -76,6 +76,7 @@
         android:layout_gravity="bottom"
         android:layout_weight="1"
         android:minHeight="50dp"
+        android:background="@android:color/holo_blue_bright"
         android:orientation="horizontal">
 
         <!--全选图标模块-->
@@ -139,10 +140,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/app_main"
+            android:background="@drawable/shape_corner"
             android:gravity="center"
             android:text="@string/settle_accounts"
             android:textColor="@android:color/white"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:textSize="20sp" />
 
     </android.support.v7.widget.LinearLayoutCompat>

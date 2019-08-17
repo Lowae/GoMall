@@ -15,7 +15,7 @@
     <string name="fa_weixin">{fa-weixin}</string>
     <!--首页界面-->
     <string name="icon_scan">{icon-scan}</string>
-    <string name="index_search">搜索</string>
+    <string name="index_search">{fa-search}  搜索</string>
     <string name="fa_bullhorn">{fa-bullhorn}</string>
     <!--购物车界面-->
     <string name="clear_all">清空</string>
@@ -24,7 +24,7 @@
     <string name="fa_check_circle">{fa-check-circle}</string>
     <string name="check_all">全选</string>
     <string name="sum">合计</string>
-    <string name="price">￥0.01</string>
+    <string name="price">￥0.00</string>
     <string name="settle_accounts">结算</string>
     <!--购物车Item-->
     <string name="goods_title">商品标题</string>

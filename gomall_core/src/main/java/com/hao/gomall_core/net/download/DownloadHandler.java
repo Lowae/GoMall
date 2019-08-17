@@ -7,7 +7,8 @@ import com.hao.gomall_core.net.callback.IError;
 import com.hao.gomall_core.net.callback.IFailure;
 import com.hao.gomall_core.net.callback.IRequest;
 import com.hao.gomall_core.net.callback.ISuccess;
-import com.hao.gomall_core.utils.FileUtil;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.WeakHashMap;
 
@@ -47,7 +48,7 @@ public class DownloadHandler {
         RestCreator.getRestService().download(URL, PARAMS)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                         if (response.isSuccessful()){
                             final ResponseBody responseBody = response.body();
                             final DownloadTask downloadTask = new DownloadTask(REQUEST, SUCCESS);
@@ -65,7 +66,7 @@ public class DownloadHandler {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                         if (FAILURE != null){
                             FAILURE.onFailure();
                         }
