@@ -17,6 +17,8 @@ public class Constants {
 
     public static final String SHOP_CART_URL = BASE_URL + "/json/SHOP_CART.json";
 
+    public static final String ORDER_LIST_URL = BASE_URL + "/json/ORDER_LIST.json";
+
     public final static String BASE_IMAGE_URL = BASE_URL + "/img";
 
     //小裙子

@@ -10,17 +10,34 @@ import com.hao.gomall.mall.R;
 import com.hao.gomall.mall.R2;
 import com.hao.gomall.mall.main.personal.list.ListAdapter;
 import com.hao.gomall.mall.main.personal.list.ListBean;
+import com.hao.gomall.mall.main.personal.order.OrderListDelegate;
 import com.hao.gomall_core.delegates.bottom.BottomItemDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class PersonalDelegate extends BottomItemDelegate {
 
+    public static final String ORDER_TYPE = "ORDER_TYPE";
+    private Bundle mArgs = null;
+
     @BindView(R2.id.rv_personal_setting)
     RecyclerView mRvSetting;
+
+    @OnClick({R2.id.tv_all_order})
+    public void onClickAllOrder(){
+        mArgs.putString(ORDER_TYPE, "all");
+        startOrderListByType();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mArgs = new Bundle();
+    }
 
     @Override
     public Object setLayout() {
@@ -48,4 +65,11 @@ public class PersonalDelegate extends BottomItemDelegate {
         final ListAdapter adapter = new ListAdapter(data);
         mRvSetting.setAdapter(adapter);
     }
+
+    private void startOrderListByType(){
+        final OrderListDelegate delegate = new OrderListDelegate();
+        delegate.setArguments(mArgs);
+       getParentDelegate().getSupportDelegate().start(delegate);
+    }
+
 }
