@@ -1,4 +1,5 @@
 # GoMall
+在原来项目(https://github.com/cllh1999/Mall)中改进而来，资源文件从网络中获取的.
 <div align="center">
 <img src="https://github.com/cllh1999/GoMall/blob/master/screenshot/device-2019-08-17-144731.png" height="330" width="190" >
 
