@@ -56,7 +56,6 @@ public class RxRestClient {
     }
 
     private Observable<String> request(HttpMethod method){
-        Configurator.getInstance().withApiHost(URL);
         final RxRestService service = RestCreator.getRxRestService();
 
         Observable<String> observable = null;

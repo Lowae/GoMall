@@ -4,14 +4,23 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.net.RestClient;
 import com.hao.gomall_core.net.callback.ISuccess;
+import com.hao.gomall_core.net.rx.RxRestClient;
 import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter;
 import com.hao.gomall_core.recycler.home.bean.ResultBeanData;
+import com.hao.gomall_core.utils.Constants;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -36,25 +45,42 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
             public void run() {
                 refreshLayout.setRefreshing(false);
             }
-        }, 2000);
+        }, 1000);
     }
 
     public void fisrtPage(String url){
-        RestClient.builder()
-                .url(url)
-                .success(new ISuccess() {
+        RxRestClient.builder().url(url)
+                .build()
+                .get()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
                     @Override
-                    public void onSuccess(String response) {
-                        ResultBeanData resultBeanData = JSON.parseObject(response, ResultBeanData.class);
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        ResultBeanData resultBeanData = JSON.parseObject(s, ResultBeanData.class);
                         ResultBeanData.ResultBean resultBean = resultBeanData.getResult();
                         HomeFragmentAdapter adapter = new HomeFragmentAdapter(mContext, resultBean, iStartGoodsInfo);
                         mRecyclerView.setAdapter(adapter);
                         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 1));
                     }
-                })
-                .build()
-                .get();
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("错误", "网络请求错误", e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
+
 
     @Override
     public void onRefresh() {

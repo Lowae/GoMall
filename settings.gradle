@@ -1,1 +1,1 @@
-include ':app', ':gomall_annotations', ':gomall_compiler', ':gomall_core', ':gomall'
+include ':app', ':gomall_annotations', ':gomall_compiler', ':gomall_core', ':gomall', ':gomall_ui'
