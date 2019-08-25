@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.Utils;
 import com.hao.gomall_core.delegates.web.event.Event;
 import com.hao.gomall_core.delegates.web.event.EventManager;
 import com.joanzapata.iconify.IconFontDescriptor;
@@ -39,6 +40,7 @@ public class Configurator {
     public final void configure() {
         initIcons();
         CONFIGS.put(ConfigKeys.CONFIG_READY, true);
+        Utils.init(Mall.getApplicationContext());
     }
 
     public final Configurator withApiHost(String host) {

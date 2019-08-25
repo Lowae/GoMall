@@ -62,4 +62,5 @@ public class WebDelegateImpl extends WebDelegate {
     public void setPageLoadListener(IPageLoadListener pageLoadListener){
         this.mPageLoadListener = pageLoadListener;
     }
+
 }

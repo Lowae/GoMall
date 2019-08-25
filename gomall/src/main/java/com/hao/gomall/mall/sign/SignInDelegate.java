@@ -80,7 +80,7 @@ public class SignInDelegate extends MallDelegate {
                             MallLogger.json("USER_PROFILE", response);
                             SignHandler.onSignIn(response, mISignListenter);
                             MallLogger.d("SignInDelegate", response);
-                            startWithPop(new MallBottomDelegate());
+                            getSupportDelegate().startWithPop(new MallBottomDelegate());
                         }
                     })
                     .build()
@@ -96,7 +96,7 @@ public class SignInDelegate extends MallDelegate {
 
     @OnClick(R2.id.tv_link_sign_up)
     public void onClickLinkSignUp(){
-        start(new SignUpDalegate());
+        getSupportDelegate().start(new SignUpDalegate());
     }
 
     @Override

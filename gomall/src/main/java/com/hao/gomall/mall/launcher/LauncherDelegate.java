@@ -69,7 +69,7 @@ public class LauncherDelegate extends MallDelegate implements ITimerListener {
     //判断是否显示滑动Bannner
     private void checkIsShowScroll() {
         if (!MallPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            start(new LauncherScrollDelegate(), SINGLETASK);
+            getSupportDelegate().start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             AccountManager.checkAccount(new IUserChecker() {
                 @Override

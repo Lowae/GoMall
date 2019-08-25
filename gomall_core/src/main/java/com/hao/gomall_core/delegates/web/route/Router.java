@@ -34,7 +34,7 @@ public class Router {
         final MallDelegate topDelegate = delegate.getTopDelgate();
         final WebDelegateImpl webDelegate = WebDelegateImpl.create(url);
 
-        topDelegate.start(webDelegate);
+        topDelegate.getSupportDelegate().start(webDelegate);
         return true;
     }
 

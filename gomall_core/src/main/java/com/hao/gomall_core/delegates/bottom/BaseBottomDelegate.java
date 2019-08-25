@@ -20,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 public abstract class BaseBottomDelegate extends MallDelegate implements View.OnClickListener {
 
@@ -85,8 +85,8 @@ public abstract class BaseBottomDelegate extends MallDelegate implements View.On
             }
         }
 
-        final SupportFragment[] delegates = ITEM_DELEGATES.toArray(new SupportFragment[size]);
-        loadMultipleRootFragment(R.id.bottom_delegate_container, mIndexDelegate, delegates);
+        final ISupportFragment[] delegates = ITEM_DELEGATES.toArray(new ISupportFragment[size]);
+        getSupportDelegate().loadMultipleRootFragment(R.id.bottom_delegate_container, mIndexDelegate, delegates);
     }
 
     private void resetColor() {
@@ -110,7 +110,7 @@ public abstract class BaseBottomDelegate extends MallDelegate implements View.On
         final AppCompatTextView itemTitle = (AppCompatTextView) item.getChildAt(1);
         itemTitle.setTextColor(mClickedColor);
         //show一个Fragment,hide一个Fragment ; 主要用于类似微信主页那种 切换tab的情况
-        showHideFragment(ITEM_DELEGATES.get(tag), ITEM_DELEGATES.get(mCurrentDelegate));
+        getSupportDelegate().showHideFragment(ITEM_DELEGATES.get(tag), ITEM_DELEGATES.get(mCurrentDelegate));
         mCurrentDelegate = tag;
     }
 }

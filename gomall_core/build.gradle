@@ -78,4 +78,10 @@ dependencies {
     //Google AutoValue
     compileOnly 'com.google.auto.value:auto-value:1.4.1'
     annotationProcessor 'com.google.auto.value:auto-value:1.4.1'
+    //图片剪裁
+    implementation 'com.github.yalantis:ucrop:2.2.1'
+    //权限获取
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    //工具包
+    implementation 'com.blankj:utilcode:1.25.8'
 }

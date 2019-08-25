@@ -59,6 +59,6 @@ public class GoodsInfoDelegate extends MallDelegate {
         tvGoodInfoPrice.setText(String.format("￥%s", goodsBean.getCover_price()));
         final WebDelegateImpl delegate = WebDelegateImpl.create("http://m.baidu.com");
         delegate.setTopDelegate((MallDelegate) getParentFragment());
-        loadRootFragment(R.id.ll_web_container, delegate);
+        getSupportDelegate().loadRootFragment(R.id.ll_web_container, delegate);
     }
 }

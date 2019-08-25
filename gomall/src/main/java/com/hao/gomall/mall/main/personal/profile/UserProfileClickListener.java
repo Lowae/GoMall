@@ -2,15 +2,21 @@ package com.hao.gomall.mall.main.personal.profile;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.hao.gomall.mall.R;
 import com.hao.gomall.mall.main.personal.list.ListBean;
 import com.hao.gomall.mall.ui.date.DateDialogUtil;
 import com.hao.gomall_core.delegates.MallDelegate;
+import com.hao.gomall_core.utils.callback.CallbackManager;
+import com.hao.gomall_core.utils.callback.CallbackType;
+import com.hao.gomall_core.utils.callback.IGlobalCallback;
 
 public class UserProfileClickListener extends SimpleClickListener {
 
@@ -29,6 +35,16 @@ public class UserProfileClickListener extends SimpleClickListener {
         final int id = bean.getmId();
         switch (id){
             case 1:
+                CallbackManager.getInstance().addCallback(CallbackType.ON_CROP, new IGlobalCallback<Uri>() {
+                    @Override
+                    public void excuteCallback(Uri arg) {
+                        final ImageView avatar = view.findViewById(R.id.img_arrow_avatar);
+                        Glide.with(delegate)
+                                .load(arg)
+                                .into(avatar);
+                    }
+                });
+                delegate.startCameraWithCheck();
                 break;
             case 2:
                 break;

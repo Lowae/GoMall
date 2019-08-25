@@ -31,7 +31,7 @@ public class DiscoverDelegate extends BottomItemDelegate {
         super.onLazyInitView(savedInstanceState);
         final WebDelegateImpl delegate = WebDelegateImpl.create("https://h5.m.taobao.com");
         delegate.setTopDelegate((MallDelegate) getParentFragment());
-        loadRootFragment(R.id.fl_web_discovery_container, delegate);
+        getSupportDelegate().loadRootFragment(R.id.fl_web_discovery_container, delegate);
     }
 
     @Override
