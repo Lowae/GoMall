@@ -7,30 +7,20 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.hao.gomall.mall.R;
 import com.hao.gomall.mall.R2;
 import com.hao.gomall.mall.goods.GoodsInfoActivity;
 import com.hao.gomall.mall.util.Constants;
 import com.hao.gomall_core.delegates.bottom.BottomItemDelegate;
-import com.hao.gomall_core.net.RestCreator;
-import com.hao.gomall_core.net.rx.RxRestClient;
 import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.bean.GoodsBean;
 import com.hao.gomall_core.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
-import java.util.Map;
 import java.util.Objects;
-import java.util.WeakHashMap;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 import static com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter.GOODS_BEAN;
 
@@ -80,6 +70,7 @@ public class IndexDelegate extends BottomItemDelegate implements IStartGoodsInfo
         Intent intent = new Intent(getContext(), GoodsInfoActivity.class);
         intent.putExtra(GOODS_BEAN,goodsBean);
         Objects.requireNonNull(getContext()).startActivity(intent);
+        _mActivity.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
 
 

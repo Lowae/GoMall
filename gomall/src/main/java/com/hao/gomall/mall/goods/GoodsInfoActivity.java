@@ -3,6 +3,7 @@ package com.hao.gomall.mall.goods;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.hao.gomall.mall.R;
 import com.hao.gomall_core.activities.ProxyActivity;
 import com.hao.gomall_core.delegates.MallDelegate;
 import com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter;
@@ -28,4 +29,10 @@ public class GoodsInfoActivity extends ProxyActivity {
         return delegate;
     }
 
+    @Override
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
+        finish();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+    }
 }

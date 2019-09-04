@@ -5,17 +5,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.hao.gomall_core.app.Mall;
-import com.hao.gomall_core.net.RestClient;
-import com.hao.gomall_core.net.callback.ISuccess;
 import com.hao.gomall_core.net.rx.RxRestClient;
 import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter;
 import com.hao.gomall_core.recycler.home.bean.ResultBeanData;
-import com.hao.gomall_core.utils.Constants;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
