@@ -9,7 +9,7 @@
         android:id="@+id/pageOne"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/white"
         android:scrollbars="vertical">
 
         <LinearLayout
@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/iv_good_info_image"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="400dp"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
@@ -102,7 +102,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="10dp"
                 android:text="提示：普通商品享有质量问题7天退货，签收后3个工作日内可换货。其他特殊商品（如手办）的售后以页面说明为准"
                 android:textColor="#3c3d40" />
@@ -115,16 +115,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:layout_gravity="center"
+                android:gravity="center|bottom"
                 android:padding="10dp"
                 android:text="图文详情"
                 android:textColor="#3c3d40"
                 android:textSize="15sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ed3f3f" />
 
         </LinearLayout>
 
