@@ -1,8 +1,11 @@
 package com.hao.gomall_core.delegates.web;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.webkit.JavascriptInterface;
 
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.ToastUtils;
 import com.hao.gomall_core.delegates.web.event.Event;
 import com.hao.gomall_core.delegates.web.event.EventManager;
 
@@ -30,5 +33,25 @@ public final class MallWebInterface {
             return event.execute(params);
         }
         return null;
+    }
+
+    @JavascriptInterface
+    public void shared(){
+        AlertDialog dialog = new AlertDialog.Builder(mWebDelegate.getContext())
+                .setTitle("分享")
+                .setPositiveButton("确认跳转", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ToastUtils.showShort("分享成功！");
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .create();
+        dialog.show();
     }
 }
