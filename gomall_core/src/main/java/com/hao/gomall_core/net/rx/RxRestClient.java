@@ -2,7 +2,6 @@ package com.hao.gomall_core.net.rx;
 
 import android.content.Context;
 
-import com.hao.gomall_core.app.Configurator;
 import com.hao.gomall_core.net.HttpMethod;
 import com.hao.gomall_core.net.RestCreator;
 import com.hao.gomall_core.ui.LoaderStyle;
@@ -71,13 +70,11 @@ public class RxRestClient {
                 observable = service.post(URL, PARAMS);
                 break;
             case POST_RAW:
+            case PUT_RAW:
                 observable = service.postRaw(URL, BODY);
                 break;
             case PUT:
                 observable = service.put(URL, PARAMS);
-                break;
-            case PUT_RAW:
-                observable = service.postRaw(URL, BODY);
                 break;
             case DELETE:
                 observable = service.delete(URL, PARAMS);
