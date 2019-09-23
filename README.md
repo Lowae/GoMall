@@ -7,7 +7,7 @@
 
 <img src="https://github.com/cllh1999/GoMall/blob/master/screenshot/device-2019-08-17-145420.png" height="330" width="190" >
 
-<img src="https://github.com/cllh1999/GoMall/blob/master/screenshot/device-2019-08-17-155315.png" height="330" width="190" >
+<img src="https://github.com/cllh1999/GoMall/blob/master/screenshot/device-2019-09-09-103513.png" height="330" width="190" >
 
 </div>
 
