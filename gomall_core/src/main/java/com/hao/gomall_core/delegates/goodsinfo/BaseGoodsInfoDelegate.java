@@ -29,6 +29,7 @@ public abstract class BaseGoodsInfoDelegate extends MallDelegate {
     @BindView(R2.id.goods_delegate_container)
     ViewPager viewPager;
 
+
     private final LinkedHashMap<String, MallDelegate> ITEMS = new LinkedHashMap<>();
 
     public abstract LinkedHashMap<String, MallDelegate> setItems();
@@ -59,4 +60,6 @@ public abstract class BaseGoodsInfoDelegate extends MallDelegate {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+
 }

@@ -14,8 +14,8 @@
             android:id="@+id/goods_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:contentInsetStart="0dp">
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/goods_tabs"
@@ -40,6 +40,76 @@
         android:layout_height="match_parent"
         android:layout_below="@id/appBar"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     </android.support.v4.view.ViewPager>
+
+
+    <LinearLayout
+        android:id="@+id/ll_goods_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#fff"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray">
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/tv_good_info_callcenter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="{fa-user}\n联系客服"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="20sp" />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/tv_good_info_collection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="{fa-star-o}\n收藏"
+                android:textColor="#393b3e"
+                android:textSize="20sp" />
+
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/tv_good_info_cart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="{fa-shopping-cart}\n购物车"
+                android:textColor="#393b3e"
+                android:textSize="20sp" />
+
+
+            <com.joanzapata.iconify.widget.IconButton
+                android:id="@+id/btn_good_info_addcart"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="{fa-shopping-cart}加入购物车"
+                android:background="@drawable/shape_corner"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
