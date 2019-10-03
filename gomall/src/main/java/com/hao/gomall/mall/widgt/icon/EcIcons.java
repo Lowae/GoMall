@@ -1,4 +1,4 @@
-package com.hao.gomall.mall.icon;
+package com.hao.gomall.mall.widgt.icon;
 
 import com.joanzapata.iconify.Icon;
 

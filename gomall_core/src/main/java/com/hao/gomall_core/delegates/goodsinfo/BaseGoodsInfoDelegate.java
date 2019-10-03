@@ -10,6 +10,7 @@ import com.hao.gomall_core.R;
 import com.hao.gomall_core.R2;
 import com.hao.gomall_core.delegates.MallDelegate;
 import com.hao.gomall_core.delegates.goodsinfo.adapter.GoodsPageAdapter;
+import com.hao.gomall_core.utils.MallLogger;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -59,7 +60,23 @@ public abstract class BaseGoodsInfoDelegate extends MallDelegate {
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-    }
 
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                MallLogger.d("select---"+tab.getText());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                MallLogger.d("unselect---"+tab.getText());
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
 
 }

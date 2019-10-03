@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.hao.gomall.event.TestEvent;
 import com.hao.gomall.mall.db.DBManager;
-import com.hao.gomall.mall.icon.FontEcModule;
+import com.hao.gomall.mall.widgt.icon.FontEcModule;
 import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.net.interceptors.DebugInterceptor;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;

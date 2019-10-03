@@ -36,4 +36,5 @@ public class GoodsPageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return ITEM_DELEGATES.size();
     }
+
 }
