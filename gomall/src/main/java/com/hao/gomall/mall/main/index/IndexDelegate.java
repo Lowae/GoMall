@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -16,6 +15,7 @@ import com.hao.gomall_core.delegates.bottom.BottomItemDelegate;
 import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.bean.GoodsBean;
 import com.hao.gomall_core.ui.refresh.RefreshHandler;
+import com.hao.gomall_core.widget.PullRecyclerView;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.Objects;
@@ -26,7 +26,7 @@ import static com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter.GOOD
 
 public class IndexDelegate extends BottomItemDelegate implements IStartGoodsInfo {
     @BindView(R2.id.rv_index)
-    RecyclerView rvIndex;
+    PullRecyclerView rvIndex;
     @BindView(R2.id.refresh_index)
     SwipeRefreshLayout refreshIndex;
     @BindView(R2.id.icon_index_scan)

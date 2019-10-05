@@ -76,5 +76,7 @@ public class Constants {
     //首饰厂
     public static final String SHOUSHI_STORE = BASE_URL + "/json/SHOUSHI_STORE.json";
 
+    public static final String HOTINFOMORE = BASE_URL + "/json/Hot/HotInfo%d.json";
+
     public static Boolean isBackHome = false;
 }

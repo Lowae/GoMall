@@ -3,7 +3,6 @@ package com.hao.gomall_core.ui.refresh;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -13,6 +12,9 @@ import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter;
 import com.hao.gomall_core.recycler.home.bean.ResultBeanData;
 import com.hao.gomall_core.recycler.home.decoration.HotRecyclerViewDecoration;
+import com.hao.gomall_core.utils.Constants;
+import com.hao.gomall_core.utils.MallLogger;
+import com.hao.gomall_core.widget.PullRecyclerView;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -22,12 +24,42 @@ import io.reactivex.schedulers.Schedulers;
 public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
 
     private final SwipeRefreshLayout refreshLayout;
-    private RecyclerView mRecyclerView;
+    private PullRecyclerView mRecyclerView;
     private Context mContext;
     private IStartGoodsInfo iStartGoodsInfo;
 
+    private HomeFragmentAdapter adapter;
 
-    public RefreshHandler(SwipeRefreshLayout refreshLayout, RecyclerView rvIndex, Context context, IStartGoodsInfo iStartGoodsInfo) {
+    private ResultBeanData resultBeanData;
+
+    private int page = 1;
+
+    private Observer<String> mObserver = new Observer<String>() {
+        @Override
+        public void onSubscribe(Disposable d) {
+
+        }
+
+        @Override
+        public void onNext(String s) {
+            adapter.hotInfoBeans.addAll(JSON.parseArray(s, ResultBeanData.ResultBean.HotInfoBean.class));
+            page++;
+            mRecyclerView.onRefreshComplete(true);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            MallLogger.e("HomeFragmentadapter", e.getMessage());
+            mRecyclerView.onRefreshComplete(false);
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    };
+
+    public RefreshHandler(SwipeRefreshLayout refreshLayout, PullRecyclerView rvIndex, Context context, IStartGoodsInfo iStartGoodsInfo) {
         this.refreshLayout = refreshLayout;
         mRecyclerView = rvIndex;
         mContext = context;
@@ -46,6 +78,7 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
     }
 
     public void fisrtPage(String url){
+
         RxRestClient.builder().url(url)
                 .build()
                 .get()
@@ -59,9 +92,8 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
 
                     @Override
                     public void onNext(String s) {
-                        ResultBeanData resultBeanData = JSON.parseObject(s, ResultBeanData.class);
-                        ResultBeanData.ResultBean resultBean = resultBeanData.getResult();
-                        HomeFragmentAdapter adapter = new HomeFragmentAdapter(mContext, resultBean, iStartGoodsInfo);
+                        resultBeanData = JSON.parseObject(s, ResultBeanData.class);
+                        adapter = new HomeFragmentAdapter(mContext, resultBeanData.getResult(), iStartGoodsInfo);
                         mRecyclerView.setAdapter(adapter);
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2);
                         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -75,8 +107,23 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
                             }
                         });
                         mRecyclerView.setLayoutManager(gridLayoutManager);
+                        mRecyclerView.setOnPullRefreshListener(new PullRecyclerView.PullRecyclerRefreshListener() {
+                            @Override
+                            public void loadMore() {
+                                RxRestClient.builder().url(String.format(Constants.HOTINFOMORE, page))
+                                        .build()
+                                        .get()
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(mObserver);
+                            }
+
+                            @Override
+                            public void onRefresh() {
+
+                            }
+                        });
                         mRecyclerView.addItemDecoration(new HotRecyclerViewDecoration());
-//                        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 1));
                     }
 
                     @Override

@@ -24,6 +24,7 @@ import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.bean.GoodsBean;
 import com.hao.gomall_core.recycler.home.bean.ResultBeanData;
 import com.hao.gomall_core.utils.Constants;
+import com.hao.gomall_core.widget.PullRecyclerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class HomeFragmentAdapter extends RecyclerView.Adapter {
+public class HomeFragmentAdapter extends PullRecyclerView.PullRefreshAdapter {
 
     public static final int BANNER = 0;
     public static final int CHANNEL = 1;
@@ -52,7 +53,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     private ResultBeanData.ResultBean resultBean;
     private LayoutInflater layoutInflater;
 
-    private List<ResultBeanData.ResultBean.HotInfoBean> hotInfoBeans;
+    public List<ResultBeanData.ResultBean.HotInfoBean> hotInfoBeans;
 
     private IStartGoodsInfo iStartGoodsInfo;
 
@@ -67,82 +68,75 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         this.iStartGoodsInfo = iStartGoodsInfo;
     }
 
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        if (i == BANNER) {
-            return new BannerViewHolder(mContext, layoutInflater.inflate(R.layout.banner_viewpager, null));
-        } else if (i == CHANNEL) {
-            return new ChannelViewHolder(mContext, layoutInflater.inflate(R.layout.channel_item, null));
-        } else if (i == ACT) {
-            return new ActViewHolder(mContext, layoutInflater.inflate(R.layout.act_item, null));
-        } else if (i == SECKILL) {
-            return new SeckillViewHolder(mContext, layoutInflater.inflate(R.layout.seckill_item, null));
-        } else if (i == RECOMMEND) {
-            return new RecommendViewHolder(mContext, layoutInflater.inflate(R.layout.recommend_item, null));
-        } else if (i == HOTHEADER){
-            return new HotHeaderHolder(layoutInflater.inflate(R.layout.hot_item, null));
-        } else if (i == HOT) {
-            return new HotViewHolder(layoutInflater.inflate(R.layout.item_hot_recyclerview, null));
-        }
-        return null;
-    }
+
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        if (getItemViewType(i) == BANNER) {
-            BannerViewHolder bannerViewHolder = (BannerViewHolder) viewHolder;
-            bannerViewHolder.setData(resultBean.getBanner_info());
-        } else if (getItemViewType(i) == CHANNEL) {
-            ChannelViewHolder channelViewHolder = (ChannelViewHolder) viewHolder;
-            channelViewHolder.setData(resultBean.getChannel_info());
-        } else if (getItemViewType(i) == ACT) {
-            ActViewHolder actViewHolder = (ActViewHolder) viewHolder;
-            actViewHolder.setData(resultBean.getAct_info());
-        } else if (getItemViewType(i) == SECKILL) {
-            SeckillViewHolder seckillViewHolder = (SeckillViewHolder) viewHolder;
-            seckillViewHolder.setData(resultBean.getSeckill_info());
-        } else if (getItemViewType(i) == RECOMMEND) {
-            RecommendViewHolder recommendViewHolder = (RecommendViewHolder) viewHolder;
-            recommendViewHolder.setData(resultBean.getRecommend_info());
-        } else if (getItemViewType(i) == HOT) {
-            HotViewHolder hotViewHolder = (HotViewHolder) viewHolder;
-            hotViewHolder.setData(i - HOT);
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        switch (position) {
-            case BANNER:
-                currentType = BANNER;
-                break;
-            case CHANNEL:
-                currentType = CHANNEL;
-                break;
-            case ACT:
-                currentType = ACT;
-                break;
-            case SECKILL:
-                currentType = SECKILL;
-                break;
-            case RECOMMEND:
-                currentType = RECOMMEND;
-                break;
-            case HOTHEADER:
-                currentType = HOTHEADER;
-                break;
-            default:
-                currentType = HOT;
-                break;
-
+    protected int getOtherItemType(int position) {
+        if (position == BANNER) {
+            currentType = BANNER;
+        } else if (position == CHANNEL) {
+            currentType = CHANNEL;
+        } else if (position == ACT) {
+            currentType = ACT;
+        } else if (position == SECKILL) {
+            currentType = SECKILL;
+        } else if (position == RECOMMEND) {
+            currentType = RECOMMEND;
+        } else if (position == HOTHEADER) {
+            currentType = HOTHEADER;
+        } else {
+            currentType = HOT;
         }
         return currentType;
     }
 
     @Override
+    protected void onBindOtherViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        if (getItemViewType(position) == BANNER) {
+            BannerViewHolder bannerViewHolder = (BannerViewHolder) viewHolder;
+            bannerViewHolder.setData(resultBean.getBanner_info());
+        } else if (getItemViewType(position) == CHANNEL) {
+            ChannelViewHolder channelViewHolder = (ChannelViewHolder) viewHolder;
+            channelViewHolder.setData(resultBean.getChannel_info());
+        } else if (getItemViewType(position) == ACT) {
+            ActViewHolder actViewHolder = (ActViewHolder) viewHolder;
+            actViewHolder.setData(resultBean.getAct_info());
+        } else if (getItemViewType(position) == SECKILL) {
+            SeckillViewHolder seckillViewHolder = (SeckillViewHolder) viewHolder;
+            seckillViewHolder.setData(resultBean.getSeckill_info());
+        } else if (getItemViewType(position) == RECOMMEND) {
+            RecommendViewHolder recommendViewHolder = (RecommendViewHolder) viewHolder;
+            recommendViewHolder.setData(resultBean.getRecommend_info());
+        } else if (getItemViewType(position) == HOT) {
+            HotViewHolder hotViewHolder = (HotViewHolder) viewHolder;
+            hotViewHolder.setData(position - HOT);
+        }
+    }
+
+    @Override
+    protected RecyclerView.ViewHolder onOtherItemHolder(ViewGroup viewGroup, int viewType) {
+        if (viewType == BANNER) {
+            return new BannerViewHolder(mContext, layoutInflater.inflate(R.layout.banner_viewpager, viewGroup, false));
+        } else if (viewType == CHANNEL) {
+            return new ChannelViewHolder(mContext, layoutInflater.inflate(R.layout.channel_item, viewGroup, false));
+        } else if (viewType == ACT) {
+            return new ActViewHolder(mContext, layoutInflater.inflate(R.layout.act_item, viewGroup, false));
+        } else if (viewType == SECKILL) {
+            return new SeckillViewHolder(mContext, layoutInflater.inflate(R.layout.seckill_item, viewGroup,false));
+        } else if (viewType == RECOMMEND) {
+            return new RecommendViewHolder(mContext, layoutInflater.inflate(R.layout.recommend_item, viewGroup,false));
+        } else if (viewType == HOTHEADER) {
+            return new HotHeaderHolder(layoutInflater.inflate(R.layout.hot_item, viewGroup, false));
+        } else if (viewType == HOT) {
+            return new HotViewHolder(layoutInflater.inflate(R.layout.item_hot_recyclerview, null));
+        }
+        return null;
+    }
+
+
+    @Override
     public int getItemCount() {
-        return hotInfoBeans.size() + HOT;
+        return hotInfoBeans.size() + HOT + 1;
     }
 
 
@@ -366,7 +360,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class HotHeaderHolder extends RecyclerView.ViewHolder{
+    class HotHeaderHolder extends RecyclerView.ViewHolder {
 
         public HotHeaderHolder(@NonNull View itemView) {
             super(itemView);

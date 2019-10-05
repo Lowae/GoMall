@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -177,7 +176,7 @@ public class PullRecyclerView extends RecyclerView implements SwipeRefreshLayout
                 }
 
             }
-        } else if (success && !isLoadingMore) {
+        } else if (success) {
             oldItemCount = mAdapter.getItemCount();
             mSwipeRefreshLayout.setRefreshing(false);
             mAdapter.notifyDataSetChanged();
@@ -190,20 +189,6 @@ public class PullRecyclerView extends RecyclerView implements SwipeRefreshLayout
                 isLoadOrOnRefresh = false;
                 mSwipeRefreshLayout.setRefreshing(false);
             }
-            Snackbar.make(this, R.string.pull_load_error, Snackbar.LENGTH_LONG).setAction(R.string.pull_reload, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (isLoadOrOnRefresh) {
-                        isLoadingMore = true;
-                        mAdapter.notifyItemInserted(mAdapter.getItemCount());
-                        PullRecyclerView.this.smoothScrollToPosition(mAdapter.getItemCount());
-                        mRefreshListener.loadMore();
-                    } else {
-                        mSwipeRefreshLayout.setRefreshing(true);
-                        mRefreshListener.onRefresh();
-                    }
-                }
-            }).show();
         }
     }
 
@@ -246,9 +231,9 @@ public class PullRecyclerView extends RecyclerView implements SwipeRefreshLayout
         }
     }
 
-    private static final int TYPE_FOOT = 0;
-    private static final int TYPE_ITEM = 1;
-    private static final int TYPE_NULL = 2;
+    private static final int TYPE_FOOT = -1;
+    private static final int TYPE_ITEM = -2;
+    private static final int TYPE_NULL = -3;
 
     public abstract static class PullRefreshAdapter<T> extends Adapter<ViewHolder> {
 
@@ -288,15 +273,15 @@ public class PullRecyclerView extends RecyclerView implements SwipeRefreshLayout
 
         @Override
         public int getItemViewType(int position) {
-            Log.d("TYPE:", String.valueOf(isVisibleFull));
             if (position + 1 == getItemCount() && isVisibleFull) {
                 return TYPE_FOOT;
             } else if (position + 1 == getItemCount() && !isVisibleFull) {
                 return TYPE_NULL;
             } else {
-                return TYPE_ITEM;
+                return getOtherItemType(position);
             }
         }
+
 
 
         @NotNull
@@ -337,6 +322,8 @@ public class PullRecyclerView extends RecyclerView implements SwipeRefreshLayout
                 onBindOtherViewHolder(holder, position);
             }
         }
+
+        protected abstract int getOtherItemType(int position);
 
         protected abstract void onBindOtherViewHolder(ViewHolder holder, int position);
 
