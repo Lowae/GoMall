@@ -19,7 +19,7 @@ public class ChannelAdapter extends BaseAdapter {
     private Context context;
     private List<ResultBeanData.ResultBean.ChannelInfoBean> datas;
 
-    ChannelAdapter(Context context, List<ResultBeanData.ResultBean.ChannelInfoBean> channel_info){
+    public ChannelAdapter(Context context, List<ResultBeanData.ResultBean.ChannelInfoBean> channel_info){
         this.context = context;
         this.datas = channel_info;
     }

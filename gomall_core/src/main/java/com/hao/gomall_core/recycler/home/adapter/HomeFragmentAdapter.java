@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +23,6 @@ import com.hao.gomall_core.R;
 import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.bean.GoodsBean;
 import com.hao.gomall_core.recycler.home.bean.ResultBeanData;
-import com.hao.gomall_core.recycler.home.decoration.HotRecyclerViewDecoration;
 import com.hao.gomall_core.utils.Constants;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -39,18 +38,21 @@ import java.util.List;
 
 public class HomeFragmentAdapter extends RecyclerView.Adapter {
 
-    private static final int BANNER = 0;
-    private static final int CHANNEL = 1;
-    private static final int ACT = 2;
-    private static final int SECKILL = 3;
-    private static final int RECOMMEND = 4;
-    private static final int HOT = 5;
+    public static final int BANNER = 0;
+    public static final int CHANNEL = 1;
+    public static final int ACT = 2;
+    public static final int SECKILL = 3;
+    public static final int RECOMMEND = 4;
+    public static final int HOTHEADER = 5;
+    public static final int HOT = 6;
 
     public static final String GOODS_BEAN = "goodsBean";
 
     private Context mContext;
     private ResultBeanData.ResultBean resultBean;
     private LayoutInflater layoutInflater;
+
+    private List<ResultBeanData.ResultBean.HotInfoBean> hotInfoBeans;
 
     private IStartGoodsInfo iStartGoodsInfo;
 
@@ -60,6 +62,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     public HomeFragmentAdapter(Context mContext, ResultBeanData.ResultBean resultBean, IStartGoodsInfo iStartGoodsInfo) {
         this.mContext = mContext;
         this.resultBean = resultBean;
+        hotInfoBeans = resultBean.getHot_info();
         layoutInflater = LayoutInflater.from(mContext);
         this.iStartGoodsInfo = iStartGoodsInfo;
     }
@@ -67,48 +70,50 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        if (i == BANNER){
+        if (i == BANNER) {
             return new BannerViewHolder(mContext, layoutInflater.inflate(R.layout.banner_viewpager, null));
-        }else if (i == CHANNEL){
+        } else if (i == CHANNEL) {
             return new ChannelViewHolder(mContext, layoutInflater.inflate(R.layout.channel_item, null));
-        }else if (i == ACT){
+        } else if (i == ACT) {
             return new ActViewHolder(mContext, layoutInflater.inflate(R.layout.act_item, null));
-        }else if (i == SECKILL){
+        } else if (i == SECKILL) {
             return new SeckillViewHolder(mContext, layoutInflater.inflate(R.layout.seckill_item, null));
-        }else if (i == RECOMMEND){
+        } else if (i == RECOMMEND) {
             return new RecommendViewHolder(mContext, layoutInflater.inflate(R.layout.recommend_item, null));
-        }else if (i == HOT){
-            return new HotViewHolder(mContext, layoutInflater.inflate(R.layout.hot_item, null));
+        } else if (i == HOTHEADER){
+            return new HotHeaderHolder(layoutInflater.inflate(R.layout.hot_item, null));
+        } else if (i == HOT) {
+            return new HotViewHolder(layoutInflater.inflate(R.layout.item_hot_recyclerview, null));
         }
         return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        if (getItemViewType(i) == BANNER){
+        if (getItemViewType(i) == BANNER) {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) viewHolder;
             bannerViewHolder.setData(resultBean.getBanner_info());
-        }else if (getItemViewType(i) == CHANNEL){
+        } else if (getItemViewType(i) == CHANNEL) {
             ChannelViewHolder channelViewHolder = (ChannelViewHolder) viewHolder;
             channelViewHolder.setData(resultBean.getChannel_info());
-        }else if (getItemViewType(i) == ACT){
+        } else if (getItemViewType(i) == ACT) {
             ActViewHolder actViewHolder = (ActViewHolder) viewHolder;
             actViewHolder.setData(resultBean.getAct_info());
-        }else if (getItemViewType(i) == SECKILL){
+        } else if (getItemViewType(i) == SECKILL) {
             SeckillViewHolder seckillViewHolder = (SeckillViewHolder) viewHolder;
             seckillViewHolder.setData(resultBean.getSeckill_info());
-        }else if (getItemViewType(i) == RECOMMEND){
+        } else if (getItemViewType(i) == RECOMMEND) {
             RecommendViewHolder recommendViewHolder = (RecommendViewHolder) viewHolder;
             recommendViewHolder.setData(resultBean.getRecommend_info());
-        }else if(getItemViewType(i)==HOT){
+        } else if (getItemViewType(i) == HOT) {
             HotViewHolder hotViewHolder = (HotViewHolder) viewHolder;
-            hotViewHolder.setData(resultBean.getHot_info());
+            hotViewHolder.setData(i - HOT);
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        switch (position){
+        switch (position) {
             case BANNER:
                 currentType = BANNER;
                 break;
@@ -124,7 +129,10 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             case RECOMMEND:
                 currentType = RECOMMEND;
                 break;
-            case HOT:
+            case HOTHEADER:
+                currentType = HOTHEADER;
+                break;
+            default:
                 currentType = HOT;
                 break;
 
@@ -134,7 +142,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 6;
+        return hotInfoBeans.size() + HOT;
     }
 
 
@@ -142,7 +150,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         iStartGoodsInfo.startGoodsInfo(goodsBean);
     }
 
-    class BannerViewHolder extends RecyclerView.ViewHolder{
+    class BannerViewHolder extends RecyclerView.ViewHolder {
 
         private Context mContext;
         private View itemView;
@@ -155,9 +163,9 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             this.banner = itemView.findViewById(R.id.banner);
         }
 
-        public void setData(List<ResultBeanData.ResultBean.BannerInfoBean> banner_info){
+        public void setData(List<ResultBeanData.ResultBean.BannerInfoBean> banner_info) {
             List<String> imagesUrl = new ArrayList<>();
-            for (ResultBeanData.ResultBean.BannerInfoBean bannerInfoBean : banner_info){
+            for (ResultBeanData.ResultBean.BannerInfoBean bannerInfoBean : banner_info) {
                 imagesUrl.add(bannerInfoBean.getImage());
                 Log.e("TAG", bannerInfoBean.getImage());
             }
@@ -166,13 +174,13 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             banner.setImages(imagesUrl).setImageLoader(new ImageLoader() {
                 @Override
                 public void displayImage(Context context, Object path, ImageView imageView) {
-                    Glide.with(context).load(Constants.BASE_IMAGE_URL+path).into(imageView);
+                    Glide.with(context).load(Constants.BASE_IMAGE_URL + path).into(imageView);
                 }
             }).start();
             banner.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {
-                    Toast.makeText(mContext, "position = "+position, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "position = " + position, Toast.LENGTH_SHORT).show();
 //                    startGoodsInfoActivity();
                 }
             });
@@ -180,11 +188,10 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     }
 
 
-    class ChannelViewHolder extends RecyclerView.ViewHolder{
+    class ChannelViewHolder extends RecyclerView.ViewHolder {
 
         private Context mContext;
         private GridView channel_gridView;
-        private ChannelAdapter adapter;
 
         ChannelViewHolder(final Context mContext, @NonNull View itemView) {
             super(itemView);
@@ -194,13 +201,13 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(List<ResultBeanData.ResultBean.ChannelInfoBean> channel_info) {
-            adapter = new ChannelAdapter(mContext, channel_info);
+            ChannelAdapter adapter = new ChannelAdapter(mContext, channel_info);
             channel_gridView.setAdapter(adapter);
             channel_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (position <= 8){
-                        Toast.makeText(mContext, "position : "+position, Toast.LENGTH_SHORT).show();
+                    if (position <= 8) {
+                        Toast.makeText(mContext, "position : " + position, Toast.LENGTH_SHORT).show();
                         /*Intent intent = new Intent(mContext, GoodsListActivity.class);
                         intent.putExtra("position", position);
                         mContext.startActivity(intent);*/
@@ -210,7 +217,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class ActViewHolder extends RecyclerView.ViewHolder{
+    class ActViewHolder extends RecyclerView.ViewHolder {
 
         private Context mContext;
         private ViewPager act_viewpager;
@@ -243,12 +250,12 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                     ImageView imageView = new ImageView(mContext);
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                    Glide.with(mContext).load(Constants.BASE_IMAGE_URL+act_info.get(position).getIcon_url()).into(imageView);
+                    Glide.with(mContext).load(Constants.BASE_IMAGE_URL + act_info.get(position).getIcon_url()).into(imageView);
 
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -264,13 +271,12 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class SeckillViewHolder extends RecyclerView.ViewHolder{
+    class SeckillViewHolder extends RecyclerView.ViewHolder {
 
         private Context mContext;
         private TextView tv_time_seckill;
         private TextView tv_more_seckill;
         private RecyclerView rv_seckill;
-        private SeckillRecyclerViewAdapter adapter;
 
         //相差多少时间-毫秒
         private long dt = 0;
@@ -284,9 +290,9 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                 String time = format.format(new Date(dt));
                 tv_time_seckill.setText(time);
                 handler.removeCallbacks(runnable);
-                if (dt <= 0){
+                if (dt <= 0) {
                     handler.removeCallbacksAndMessages(null);
-                }else {
+                } else {
                     handler.postDelayed(runnable, 1000);
                 }
             }
@@ -301,11 +307,11 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(final ResultBeanData.ResultBean.SeckillInfoBean seckill_info) {
-            adapter = new SeckillRecyclerViewAdapter(mContext, seckill_info.getList());
+            SeckillRecyclerViewAdapter adapter = new SeckillRecyclerViewAdapter(mContext, seckill_info.getList());
             adapter.setOnSeckillRecyclerViewClickListener(new SeckillRecyclerViewAdapter.OnSeckillRecyclerViewClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    Toast.makeText(mContext, "秒杀 = " +position, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "秒杀 = " + position, Toast.LENGTH_SHORT).show();
                     ResultBeanData.ResultBean.SeckillInfoBean.ListBean listBean = seckill_info.getList().get(position);
 
                     GoodsBean goodsBean = new GoodsBean();
@@ -328,28 +334,25 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class RecommendViewHolder extends RecyclerView.ViewHolder{
+    class RecommendViewHolder extends RecyclerView.ViewHolder {
 
         private Context context;
-        private TextView tv_more_recommend;
         private GridView gv_recommend;
-        private RecommendGridViewAdapter adapter;
 
         public RecommendViewHolder(Context mContext, @NonNull View itemView) {
             super(itemView);
             context = mContext;
-            tv_more_recommend = itemView.findViewById(R.id.tv_more_recommend);
             gv_recommend = itemView.findViewById(R.id.gv_recommend);
         }
 
         public void setData(final List<ResultBeanData.ResultBean.RecommendInfoBean> recommend_info) {
-            adapter = new RecommendGridViewAdapter(context, recommend_info);
+            RecommendGridViewAdapter adapter = new RecommendGridViewAdapter(context, recommend_info);
             gv_recommend.setAdapter(adapter);
 
             gv_recommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
                     ResultBeanData.ResultBean.RecommendInfoBean recommendInfoBean = recommend_info.get(position);
 
                     GoodsBean goodsBean = new GoodsBean();
@@ -363,28 +366,38 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
+    class HotHeaderHolder extends RecyclerView.ViewHolder{
+
+        public HotHeaderHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
     class HotViewHolder extends RecyclerView.ViewHolder {
 
-        private Context mContext;
-        private TextView tv_more_hot;
-        private RecyclerView rv_hot;
+        private ImageView iv_hot;
+        private TextView tv_name;
+        private TextView tv_price;
+        private CardView hot_view;
 
-        private HotRecyclerViewAdapter adapter;
-
-        HotViewHolder(Context mContext, View itemView) {
+        public HotViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.mContext = mContext;
-            tv_more_hot = itemView.findViewById(R.id.tv_more_hot);
-            rv_hot = itemView.findViewById(R.id.rv_hot);
+            iv_hot = itemView.findViewById(R.id.iv_hot);
+            tv_name = itemView.findViewById(R.id.tv_name);
+            tv_price = itemView.findViewById(R.id.tv_price);
+            hot_view = itemView.findViewById(R.id.hot_view);
         }
 
-        public void setData(final List<ResultBeanData.ResultBean.HotInfoBean> hot_info) {
-            adapter = new HotRecyclerViewAdapter(mContext, hot_info);
-            adapter.setOnHotRecyclerViewClickListener(new HotRecyclerViewAdapter.OnHotRecyclerViewClickListener() {
+        public void setData(int position) {
+            ResultBeanData.ResultBean.HotInfoBean hotInfoBean = hotInfoBeans.get(position);
+            Glide.with(mContext).load(Constants.BASE_IMAGE_URL + hotInfoBean.getFigure()).optionalCenterCrop().into(iv_hot);
+            tv_name.setText(hotInfoBean.getName());
+
+            tv_price.setText(String.format("￥%s", hotInfoBean.getCover_price()));
+            hot_view.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onItemClick(int position) {
+                public void onClick(View v) {
                     Toast.makeText(mContext, "position = " + position, Toast.LENGTH_SHORT).show();
-                    ResultBeanData.ResultBean.HotInfoBean hotInfoBean =  hot_info.get(position);
                     //商品信息类
                     GoodsBean goodsBean = new GoodsBean();
                     goodsBean.setCover_price(hotInfoBean.getCover_price());
@@ -394,10 +407,6 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                     startGoodsInfoActivity(goodsBean);
                 }
             });
-            rv_hot.setLayoutManager(new GridLayoutManager(mContext, 2));
-            rv_hot.setAdapter(adapter);
-            rv_hot.addItemDecoration(new HotRecyclerViewDecoration());
-
         }
     }
 }

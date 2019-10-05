@@ -12,6 +12,7 @@ import com.hao.gomall_core.net.rx.RxRestClient;
 import com.hao.gomall_core.recycler.home.IStartGoodsInfo;
 import com.hao.gomall_core.recycler.home.adapter.HomeFragmentAdapter;
 import com.hao.gomall_core.recycler.home.bean.ResultBeanData;
+import com.hao.gomall_core.recycler.home.decoration.HotRecyclerViewDecoration;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,7 +63,20 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
                         ResultBeanData.ResultBean resultBean = resultBeanData.getResult();
                         HomeFragmentAdapter adapter = new HomeFragmentAdapter(mContext, resultBean, iStartGoodsInfo);
                         mRecyclerView.setAdapter(adapter);
-                        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 1));
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2);
+                        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                            @Override
+                            public int getSpanSize(int i) {
+                                if (adapter.getItemViewType(i) == HomeFragmentAdapter.HOT){
+                                    return 1;
+                                }else {
+                                    return 2;
+                                }
+                            }
+                        });
+                        mRecyclerView.setLayoutManager(gridLayoutManager);
+                        mRecyclerView.addItemDecoration(new HotRecyclerViewDecoration());
+//                        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 1));
                     }
 
                     @Override

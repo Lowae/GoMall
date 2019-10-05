@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.hao.gomall.event.TestEvent;
 import com.hao.gomall.mall.db.DBManager;
+import com.hao.gomall.mall.util.Constants;
 import com.hao.gomall.mall.widgt.icon.FontEcModule;
 import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.net.interceptors.DebugInterceptor;
@@ -19,7 +20,7 @@ public class MallApp extends Application {
         Mall.init(this.getApplicationContext())
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
-                .withApiHost("http://169.254.7.30:8080/")
+                .withApiHost(Constants.BASE_URL + "/")
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .withJavascriptInterface("GoMall")
                 .withWebEvent("test", new TestEvent())

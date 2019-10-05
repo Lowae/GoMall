@@ -27,6 +27,8 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     @SuppressWarnings("SpellCheckingInspection")
     private Unbinder mUnbinder = null;
 
+    public Context mContext;
+
     public abstract Object setLayout();
 
     public abstract void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView);
@@ -59,6 +61,7 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mContext = getContext();
         final View rootView;
         if (setLayout() instanceof Integer) {
             rootView = inflater.inflate((int) setLayout(), container, false);
