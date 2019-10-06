@@ -6,4 +6,6 @@
     <string name="pull_load_error">加载失败</string>
     <string name="pull_reload">重试</string>
 
+<!--    二维码扫描-->
+    <string name="scanner_view_tip_text">将二维码/条形码放入框内，即可自动扫描</string>
 </resources>

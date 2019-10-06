@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.hao.gomall_core.activities.zx.qrcode.Constant;
 import com.hao.gomall_core.ui.camera.CameraBean;
 import com.hao.gomall_core.ui.camera.MallCameraa;
 import com.hao.gomall_core.ui.camera.RequestCode;
@@ -80,6 +81,12 @@ public abstract class PermissionCheckedDelegate extends BaseDelegate{
                     break;
                 case RequestCode.CROP_ERROR:
                     Toast.makeText(getContext(), "剪裁出错", Toast.LENGTH_SHORT).show();
+                    break;
+                case RequestCode.ZX_CAMERA:
+                    if (data == null) return;
+                    String type = data.getStringExtra(Constant.EXTRA_RESULT_CODE_TYPE);
+                    String content = data.getStringExtra(Constant.EXTRA_RESULT_CONTENT);
+                    Toast.makeText(getContext(), "codeType:" + type + "\ncontent:" + content, Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;

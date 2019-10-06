@@ -122,7 +122,7 @@ public class HomeFragmentAdapter extends PullRecyclerView.PullRefreshAdapter {
         } else if (viewType == ACT) {
             return new ActViewHolder(mContext, layoutInflater.inflate(R.layout.act_item, viewGroup, false));
         } else if (viewType == SECKILL) {
-            return new SeckillViewHolder(mContext, layoutInflater.inflate(R.layout.seckill_item, viewGroup,false));
+            return new SeckillViewHolder(mContext, layoutInflater.inflate(R.layout.seckill_item,null));
         } else if (viewType == RECOMMEND) {
             return new RecommendViewHolder(mContext, layoutInflater.inflate(R.layout.recommend_item, viewGroup,false));
         } else if (viewType == HOTHEADER) {

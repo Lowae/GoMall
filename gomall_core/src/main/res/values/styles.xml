@@ -30,4 +30,18 @@
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
+
+<!--    二维码扫描相关-->
+    <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">#393A3F</item>
+        <item name="colorPrimaryDark">#393A3F</item>
+    </style>
+    <style name="ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <!--<item name="android:colorBackground">#000000</item>-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item> <!--新增一个item，用于控制menu-->
+    </style>
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>  <!--把该属性改为false即可使menu位置位于toolbar之下-->
+    </style>
 </resources>

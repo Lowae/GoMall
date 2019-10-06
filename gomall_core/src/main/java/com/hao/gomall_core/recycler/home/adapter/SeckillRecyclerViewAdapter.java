@@ -38,8 +38,8 @@ public class SeckillRecyclerViewAdapter extends RecyclerView.Adapter<SeckillRecy
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         ResultBeanData.ResultBean.SeckillInfoBean.ListBean listBean = list.get(i);
         Glide.with(context).load(Constants.BASE_IMAGE_URL + listBean.getFigure()).into(viewHolder.iv_figure);
-        viewHolder.tv_cover_price.setText(listBean.getCover_price());
-        viewHolder.tv_origin_price.setText(listBean.getOrigin_price());
+        viewHolder.tv_cover_price.setText("￥" + listBean.getCover_price());
+        viewHolder.tv_origin_price.setText("￥" + listBean.getOrigin_price());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SeckillRecyclerViewAdapter extends RecyclerView.Adapter<SeckillRecy
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView iv_figure;
         private TextView tv_cover_price;
@@ -63,7 +63,7 @@ public class SeckillRecyclerViewAdapter extends RecyclerView.Adapter<SeckillRecy
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(context, "秒杀 = " + getLayoutPosition(), Toast.LENGTH_SHORT).show();
-                    if (onSeckillRecyclerViewClickListener != null){
+                    if (onSeckillRecyclerViewClickListener != null) {
                         onSeckillRecyclerViewClickListener.onItemClick(getLayoutPosition());
                     }
                 }
@@ -71,11 +71,11 @@ public class SeckillRecyclerViewAdapter extends RecyclerView.Adapter<SeckillRecy
         }
     }
 
-    public interface OnSeckillRecyclerViewClickListener{
+    public interface OnSeckillRecyclerViewClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnSeckillRecyclerViewClickListener(OnSeckillRecyclerViewClickListener onSeckillRecyclerViewClickListener){
+    public void setOnSeckillRecyclerViewClickListener(OnSeckillRecyclerViewClickListener onSeckillRecyclerViewClickListener) {
         this.onSeckillRecyclerViewClickListener = onSeckillRecyclerViewClickListener;
     }
 }

@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
-import com.hao.gomall.mall.launcher.LauncherDelegate;
-import com.hao.gomall.mall.main.MallBottomDelegate;
-import com.hao.gomall.mall.sign.ISignListenter;
-import com.hao.gomall.mall.sign.SignInDelegate;
+import com.hao.gomall.mall.delegates.launcher.LauncherDelegate;
+import com.hao.gomall.mall.delegates.main.MallBottomDelegate;
+import com.hao.gomall.mall.delegates.sign.ISignListenter;
+import com.hao.gomall.mall.delegates.sign.SignInDelegate;
 import com.hao.gomall_core.activities.ProxyActivity;
 import com.hao.gomall_core.app.Mall;
 import com.hao.gomall_core.delegates.MallDelegate;
